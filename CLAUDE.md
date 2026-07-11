@@ -1,3 +1,18 @@
+# STOP: verify the Bridge repository first
+
+This repository is **Bridge software development** for Tori's cannabis-industry professional-network application.
+
+It is **not** Bridge of Hope OTC, an SEO client, a marketing audit, or a generic client-meeting-prep project. Do not use unrelated memory, vault files, or similarly named projects to identify this work.
+
+The correct repository is:
+
+- GitHub: `dillonmohr8777/bridge-discovery-prototype`
+- Default branch: `main`
+- Application stack: Next.js + React + TypeScript
+- Primary work: product discovery, UX/UI, front-end implementation, and Monday's Tori meeting
+
+If you cannot read this repository, stop and say exactly: `The Bridge GitHub repository is not connected to this session.` Do not search memory for another Bridge.
+
 # Claude handoff: Bridge discovery prototype
 
 ## Mission

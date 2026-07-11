@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Provisional Bridge mark</title>
+  <desc id="desc">A rounded square containing a simplified bridge.</desc>
+  <rect width="128" height="128" rx="34" fill="#0A766E"/>
+  <g fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-width="9">
+    <path d="M25 82h78"/>
+    <path d="M34 82c4-27 17-39 30-39s26 12 30 39"/>
+    <path d="M40 82V67M88 82V67"/>
+  </g>
+</svg>

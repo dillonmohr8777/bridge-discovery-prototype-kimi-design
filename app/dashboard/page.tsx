@@ -1,0 +1,23 @@
+import Link from "next/link";
+
+const metrics = [["Profile views", "184", "+18%"], ["Search appearances", "726", "+9%"], ["Contact requests", "12", "+3"], ["Saved by members", "31", "+6"]];
+
+export default function DashboardPage() {
+  return (
+    <section className="page shell">
+      <div className="dashboard-heading"><div><p className="eyebrow">Brand dashboard</p><h1>Good morning, Tori.</h1><p className="lede">Here is what is happening around your profile.</p></div><button className="button secondary" type="button">Edit profile</button></div>
+      <div className="metric-grid">{metrics.map(([label, value, delta]) => <article className="metric-card" key={label}><span>{label}</span><strong>{value}</strong><small>{delta} this month</small></article>)}</div>
+      <div className="dashboard-grid">
+        <article className="content-card">
+          <div className="section-heading compact-heading"><div><p className="eyebrow">Inbox</p><h2>Contact requests</h2></div><span className="status-chip pending">3 new</span></div>
+          {[["Harbor Dispensary", "Retail partnership", "2h"], ["Northstar Sales Group", "Territory representation", "Yesterday"], ["Mosaic Market", "Wholesale catalog", "Jul 8"]].map(([name, type, time]) => <div className="request-row" key={name}><span className="avatar small">{name.split(" ").map(x => x[0]).join("").slice(0,2)}</span><div><strong>{name}</strong><small>{type}</small></div><span className="muted">{time}</span><button type="button">Review</button></div>)}
+        </article>
+        <aside className="content-card checklist-card">
+          <p className="eyebrow">Profile strength</p><div className="score-row"><strong>82%</strong><span>Strong</span></div><div className="progress"><span style={{ width: "82%" }} /></div>
+          <ul className="checklist"><li className="done">Business details</li><li className="done">License verification</li><li className="done">Logo and cover</li><li>Add product categories</li><li>Publish first announcement</li></ul>
+          <Link className="button secondary full" href="/profile/cascade-canna">View public profile</Link>
+        </aside>
+      </div>
+    </section>
+  );
+}

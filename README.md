@@ -31,11 +31,21 @@ Open `http://localhost:3000`. Important routes:
 
 - `/directory`
 - `/join`
-- `/profile/cascade-canna`
+- `/profile/cascade-canna` (any member: `/profile/<slug>`)
 - `/dashboard`
 - `/admin/verification`
 - `/directions`
 - `/design-system`
+
+## Staging previews (one link per direction)
+
+Three static, direction-pinned copies of this prototype are hosted for side-by-side comparison. Each hides the theme switcher, labels itself "Provisional preview", and sends `noindex`; none is an approved identity.
+
+- Trusted Current — https://bridge-preview-current.netlify.app
+- Modern Network — https://bridge-preview-network.netlify.app
+- Botanical Ledger — https://bridge-preview-botanical.netlify.app
+
+Rebuild all three with `./scripts/build-staging.sh` (outputs to `staging/<direction>/`), then redeploy each folder to its Netlify site (zip deploy via the Netlify API, or drag-and-drop in the Netlify UI).
 
 ## Status and boundaries
 
@@ -47,4 +57,12 @@ This is a discovery prototype, not production software. There is no Supabase con
 npm run typecheck
 npm run lint
 npm run build
+npm run build:staging
+npm run test:staging
 ```
+
+`build:staging` creates three direction-pinned static builds under
+`staging/current`, `staging/network`, and `staging/botanical`. The verification
+command checks the expected routes, provisional label, theme lock, and noindex
+metadata before a staging upload. Netlify's three connected projects use the
+single-direction commands so each project builds only its assigned preview.

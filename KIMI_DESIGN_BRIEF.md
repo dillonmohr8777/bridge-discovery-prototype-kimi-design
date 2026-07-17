@@ -40,15 +40,6 @@ This is an isolated design lab copied from `dillonmohr8777/bridge-discovery-prot
 5. Commit the work with a descriptive message.
 6. Report the commit, changed routes, known assumptions, and the preview URL.
 
-## Future creative project: keep separate
+## Project boundary
 
-After the Bridge design lane is complete, the owner wants a separate Pittsburgh concert-venue and Blender experience. The concept should include:
-
-- a cinematic venue built in Blender with the owner's approved logo and color system;
-- a recognizable Pittsburgh setting outside the venue, with skyline, bridges, river/industrial cues, weather, lighting, and a packed crowd;
-- interactive crowd and venue moments that feel alive rather than a static render;
-- a performer avatar based only on owner-selected reference images, with no inference from unrelated personal files;
-- an album-length performance experience using only audio the owner explicitly supplies or authorizes for this project;
-- a separate public preview and repository, with large media files kept out of Bridge and out of the Git history.
-
-Do not mix this project into Bridge, do not copy a whole personal file tree, and do not upload an album, audio files, or personal imagery until the owner explicitly provides the selected assets and confirms the distribution rights and intended audience. The owner wants this queued after Bridge, not implemented inside this repository.
+The Pittsburgh concert venue, Blender environment, packed stadium, performer likeness, personal logo and imagery, and album-length performance concept belong exclusively to the **IMMOHRTAL website**. They are not a Bridge feature or a follow-up phase of Bridge. Do not plan, build, store, or publish any part of that concept in this repository.

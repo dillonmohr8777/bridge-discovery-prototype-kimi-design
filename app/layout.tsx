@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { lockedTheme } from "@/lib/direction-lock";
 
@@ -23,12 +24,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <a className="skip-link" href="#main">Skip to content</a>
         <SiteHeader />
         <main id="main">{children}</main>
-        <footer className="site-footer">
-          <div className="shell footer-inner">
-            <span>Bridge discovery prototype</span>
-            <span>Provisional identity · pending Tori approval</span>
-          </div>
-        </footer>
+        <SiteFooter />
       </body>
     </html>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 // Fictional sample queue for the discovery prototype.
 type QueueItem = {
@@ -20,17 +20,40 @@ const queue: QueueItem[] = [
 
 const needsAttention = (status: string) => status.includes("mismatch") || status.includes("missing");
 
+const statusFilters = ["All", "Ready", "Needs attention"] as const;
+type StatusFilter = (typeof statusFilters)[number];
+
 export function VerificationQueue() {
   const [oldestFirst, setOldestFirst] = useState(false);
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>("All");
 
-  const rows = [...queue].sort((a, b) =>
-    oldestFirst ? b.waitingDays - a.waitingDays : a.waitingDays - b.waitingDays,
-  );
+  const rows = useMemo(() => {
+    const filtered = queue.filter((item) => {
+      if (statusFilter === "Ready") return !needsAttention(item.status);
+      if (statusFilter === "Needs attention") return needsAttention(item.status);
+      return true;
+    });
+    return [...filtered].sort((a, b) =>
+      oldestFirst ? b.waitingDays - a.waitingDays : a.waitingDays - b.waitingDays,
+    );
+  }, [oldestFirst, statusFilter]);
 
   return (
     <div className="content-card table-card">
       <div className="result-bar">
-        <strong>Applications</strong>
+        <div className="active-filters" role="group" aria-label="Filter applications by status">
+          {statusFilters.map((filter) => (
+            <button
+              aria-pressed={statusFilter === filter}
+              className="chip-toggle"
+              key={filter}
+              onClick={() => setStatusFilter(filter)}
+              type="button"
+            >
+              {filter}
+            </button>
+          ))}
+        </div>
         <button
           aria-pressed={oldestFirst}
           className="text-button"

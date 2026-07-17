@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Profile } from "@/lib/types";
+import { SaveButton } from "./SaveButton";
 import { StatusChip } from "./StatusChip";
 
 export function ProfileCard({ profile }: { profile: Profile }) {
@@ -16,9 +17,12 @@ export function ProfileCard({ profile }: { profile: Profile }) {
       <div className="tag-row" aria-label="Specialties">
         {profile.specialties.map((tag) => <span className="tag" key={tag}>{tag}</span>)}
       </div>
-      <Link className="text-link" href={`/profile/${profile.slug}`}>
-        View profile <span aria-hidden="true">→</span>
-      </Link>
+      <div className="card-actions">
+        <Link className="text-link" href={`/profile/${profile.slug}`}>
+          View profile <span aria-hidden="true" className="arrow">→</span>
+        </Link>
+        <SaveButton slug={profile.slug} name={profile.name} />
+      </div>
     </article>
   );
 }

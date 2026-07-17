@@ -5,19 +5,29 @@ import { ProfileCard } from "@/components/ProfileCard";
 import { profiles } from "@/lib/data";
 import { matchesQuery } from "@/lib/search";
 
+type SortId = "featured" | "az" | "verified";
+
+const sortOptions: { id: SortId; label: string }[] = [
+  { id: "featured", label: "Featured" },
+  { id: "az", label: "Name A–Z" },
+  { id: "verified", label: "Verified first" },
+];
+
 export function DirectoryClient() {
   const [query, setQuery] = useState("");
   const [role, setRole] = useState("All roles");
   const [verifiedOnly, setVerifiedOnly] = useState(false);
+  const [sort, setSort] = useState<SortId>("featured");
 
-  const matches = useMemo(
-    () =>
-      profiles.filter((profile) => {
-        const matchesRole = role === "All roles" || profile.role === role;
-        return matchesQuery(profile, query) && matchesRole && (!verifiedOnly || profile.verified);
-      }),
-    [query, role, verifiedOnly],
-  );
+  const matches = useMemo(() => {
+    const filtered = profiles.filter((profile) => {
+      const matchesRole = role === "All roles" || profile.role === role;
+      return matchesQuery(profile, query) && matchesRole && (!verifiedOnly || profile.verified);
+    });
+    if (sort === "az") return [...filtered].sort((a, b) => a.name.localeCompare(b.name));
+    if (sort === "verified") return [...filtered].sort((a, b) => Number(b.verified) - Number(a.verified));
+    return filtered;
+  }, [query, role, verifiedOnly, sort]);
 
   // When nothing matches, surface members that match the search text but sit
   // outside the role/verified filters — relax verified-only first, then role.
@@ -28,11 +38,7 @@ export function DirectoryClient() {
     return (sameRole.length ? sameRole : textMatches).slice(0, 3);
   }, [matches, query, role]);
 
-  const activeConstraints = [
-    query.trim() && `“${query.trim()}”`,
-    role !== "All roles" && role,
-    verifiedOnly && "Verified only",
-  ].filter(Boolean);
+  const hasFilters = Boolean(query.trim()) || role !== "All roles" || verifiedOnly;
 
   function clearAll() {
     setQuery("");
@@ -43,44 +49,82 @@ export function DirectoryClient() {
   return (
     <div className="directory-layout">
       <aside className="filter-panel" aria-label="Directory filters">
-        <label htmlFor="directory-search">Search</label>
-        <input id="directory-search" onChange={(event) => setQuery(event.target.value)} placeholder="Name, city, state, specialty…" type="search" value={query} />
-        <label htmlFor="role-filter">Member type</label>
-        <select id="role-filter" onChange={(event) => setRole(event.target.value)} value={role}>
-          <option>All roles</option>
-          <option>Brand</option>
-          <option>Dispensary</option>
-          <option>Retailer</option>
-          <option>Sales rep</option>
-        </select>
-        <label className="check-row"><input checked={verifiedOnly} onChange={(event) => setVerifiedOnly(event.target.checked)} type="checkbox" /> Verified only</label>
-        <button className="text-button" onClick={clearAll} type="button">Clear filters</button>
+        <div>
+          <label htmlFor="directory-search">Search</label>
+          <input id="directory-search" onChange={(event) => setQuery(event.target.value)} placeholder="Name, city, state, specialty…" type="search" value={query} />
+        </div>
+        <div>
+          <label htmlFor="role-filter">Member type</label>
+          <select id="role-filter" onChange={(event) => setRole(event.target.value)} value={role}>
+            <option>All roles</option>
+            <option>Brand</option>
+            <option>Dispensary</option>
+            <option>Retailer</option>
+            <option>Sales rep</option>
+          </select>
+        </div>
+        <label className="check-row" htmlFor="verified-filter">
+          <input checked={verifiedOnly} id="verified-filter" onChange={(event) => setVerifiedOnly(event.target.checked)} type="checkbox" />
+          Verified members only
+        </label>
+        {hasFilters && <button className="text-button" onClick={clearAll} type="button">Clear all filters</button>}
+        <p className="form-hint">Directory results are fictional sample members for the prototype.</p>
       </aside>
+
       <div>
-        <div className="result-bar"><p className="result-count" role="status"><strong>{matches.length === 1 ? "1 member" : `${matches.length} members`}</strong></p><span className="muted">Fictional sample profiles</span></div>
-        {matches.length ? (
-          <div className="card-grid two">{matches.map((profile) => <ProfileCard key={profile.slug} profile={profile} />)}</div>
+        <div className="result-bar">
+          <p className="result-count" role="status">
+            {matches.length} {matches.length === 1 ? "member" : "members"}
+          </p>
+          <div className="active-filters">
+            {query.trim() && (
+              <span className="filter-chip">
+                “{query.trim()}”
+                <button aria-label="Clear search" onClick={() => setQuery("")} type="button">×</button>
+              </span>
+            )}
+            {role !== "All roles" && (
+              <span className="filter-chip">
+                {role}
+                <button aria-label="Clear member type filter" onClick={() => setRole("All roles")} type="button">×</button>
+              </span>
+            )}
+            {verifiedOnly && (
+              <span className="filter-chip">
+                Verified only
+                <button aria-label="Clear verified filter" onClick={() => setVerifiedOnly(false)} type="button">×</button>
+              </span>
+            )}
+            <span className="sort-row">
+              <label htmlFor="sort-select">Sort</label>
+              <select id="sort-select" onChange={(event) => setSort(event.target.value as SortId)} value={sort}>
+                {sortOptions.map((option) => <option key={option.id} value={option.id}>{option.label}</option>)}
+              </select>
+            </span>
+          </div>
+        </div>
+
+        {matches.length > 0 ? (
+          <div className="card-grid two">
+            {matches.map((profile) => <ProfileCard key={profile.slug} profile={profile} />)}
+          </div>
         ) : (
-          <>
-            <div className="empty-state">
-              <h2>No members match</h2>
-              {activeConstraints.length > 0 && <p>{activeConstraints.join(" · ")}</p>}
-              <div className="button-row centered">
-                {query.trim() && <button className="button secondary" onClick={() => setQuery("")} type="button">Clear search</button>}
-                <button className="button secondary" onClick={clearAll} type="button">Clear all filters</button>
-              </div>
-              <p className="form-hint">
-                This prototype searches {profiles.length} fictional sample profiles. Live whole-network search
-                arrives with the backend contract.
-              </p>
+          <div className="empty-state">
+            <p className="eyebrow">No matches</p>
+            <h2>No members fit those filters.</h2>
+            <p>Try a broader search, a different member type, or clear verification to see pending profiles.</p>
+            <div className="button-row centered">
+              <button className="button secondary" onClick={clearAll} type="button">Clear all filters</button>
             </div>
             {nearMisses.length > 0 && (
-              <section aria-label="Members outside your current filters">
-                <div className="result-bar near-miss-bar"><strong>Outside your current filters</strong></div>
-                <div className="card-grid two">{nearMisses.map((profile) => <ProfileCard key={profile.slug} profile={profile} />)}</div>
-              </section>
+              <div className="near-miss-bar">
+                <h3>Close matches outside your filters</h3>
+                <div className="card-grid two">
+                  {nearMisses.map((profile) => <ProfileCard key={profile.slug} profile={profile} />)}
+                </div>
+              </div>
             )}
-          </>
+          </div>
         )}
       </div>
     </div>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ContactRequestForm } from "@/components/ContactRequestForm";
+import { SaveButton } from "@/components/SaveButton";
 import { StatusChip } from "@/components/StatusChip";
 import { getProfile, profiles } from "@/lib/data";
 
@@ -26,7 +27,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
 
   return (
     <section className="page shell profile-page">
-      <Link className="text-link back-link" href="/directory">← Back to directory</Link>
+      <Link className="text-link back-link" href="/directory"><span aria-hidden="true">←</span> Back to directory</Link>
       <div className="profile-hero">
         <div className="profile-identity">
           <span className="avatar xlarge" aria-hidden="true">{profile.initials}</span>
@@ -42,6 +43,12 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
         <article className="content-card">
           <h2>About {profile.name}</h2>
           <p className="lede small">{profile.about}</p>
+          <dl className="meta-list">
+            <div><dt>Member type</dt><dd>{profile.role}</dd></div>
+            <div><dt>Location</dt><dd>{profile.location}</dd></div>
+            <div><dt>Serving</dt><dd>{profile.serving}</dd></div>
+            <div><dt>Status</dt><dd>{profile.verified ? "Verified business" : "Verification pending review"}</dd></div>
+          </dl>
           <h3>What we are looking for</h3>
           <div className="tag-row">
             {profile.lookingFor.map((item) => <span className="tag" key={item}>{item}</span>)}
@@ -58,9 +65,11 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
               </div>
             </>
           )}
+          <p className="form-hint">Fictional sample member for the discovery prototype.</p>
         </article>
         <aside className="contact-card">
           <ContactRequestForm profileName={profile.name} profileSlug={profile.slug} />
+          <SaveButton slug={profile.slug} name={profile.name} />
         </aside>
       </div>
     </section>

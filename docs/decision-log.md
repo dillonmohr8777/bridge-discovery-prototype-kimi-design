@@ -52,3 +52,19 @@ All Phase 1 work repaired existing defects without pre-approving product or bran
 | D-06 | Is AWS a hard hosting requirement or a proposal-level direction? | Miraj/Mac | Architecture review |
 | D-07 | What is the first geographic market and priority user role? | Tori/Melissa | Launch plan |
 | D-08 | Who approves design and scope between live sessions? | Tori/Mac | Monday close |
+
+## Provisional decisions made during the Ledger redesign (2026-07-17)
+
+A full visual/interaction redesign of the prototype ("Ledger" direction). All choices remain provisional preview material; theme ids (`current`, `network`, `botanical`) and every existing flow are unchanged.
+
+| Decision | Why it was made | Approval needed |
+|---|---|---|
+| Editorial serif display stack (Iowan Old Style / Palatino / Georgia) | Gives Bridge a distinctive "professional ledger" voice with zero webfont payload and full offline reliability | Tori / brand process |
+| Monospace micro-labels for eyebrows, metadata, and table headers | Reinforces the ledger metaphor and separates system labels from member content | Tori |
+| Restated tokens for all three directions (deeper ink, refined signal brass/violet/copper) | Stronger contrast, more premium feel, same hue families so direction comparisons stay honest | Tori |
+| Saved profiles stored in localStorage only | Makes the saved-profiles flow testable in the walkthrough with no backend and no data leaving the browser | Miraj (backend contract later) |
+| Sort control on directory (Featured / A–Z / Verified first) | Pure client-side ordering over the same fictional fixtures; improves scanability without changing search semantics | Tori |
+| Active-filter chips with per-chip clear | Makes applied constraints visible and reversible — a core directory UX expectation | Tori |
+| Admin queue status filters (All / Ready / Needs attention) | Matches the moderation workflow; client-side only over the fictional queue | Tori |
+| Ink footer with sitemap and provisional badge | Keeps the "provisional identity" framing visible on every page | Tori |
+| Reduced-motion media query gates all animation; smooth scroll disabled under reduce | Accessibility requirement from the design brief | None (required) |

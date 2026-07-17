@@ -1,0 +1,6 @@
+[build]
+  command = "npm run build:staging:current"
+  publish = "staging/current"
+
+[build.environment]
+  NODE_VERSION = "22"

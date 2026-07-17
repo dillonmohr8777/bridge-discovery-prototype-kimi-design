@@ -43,3 +43,5 @@ This is an isolated design lab copied from `dillonmohr8777/bridge-discovery-prot
 ## Project boundary
 
 The Pittsburgh concert venue, Blender environment, packed stadium, performer likeness, personal logo and imagery, and album-length performance concept belong exclusively to the **IMMOHRTAL website**. They are not a Bridge feature or a follow-up phase of Bridge. Do not plan, build, store, or publish any part of that concept in this repository.
+
+Kimi's separate IMMOHRTAL assignment lives at `https://github.com/dillonmohr8777/immohrtal-kimi-redesign`. Kimi may work on both repositories, but Bridge changes stay here and all IMMOHRTAL/Blender work stays there.

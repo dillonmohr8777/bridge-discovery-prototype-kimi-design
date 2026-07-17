@@ -42,4 +42,13 @@ This is an isolated design lab copied from `dillonmohr8777/bridge-discovery-prot
 
 ## Future creative project: keep separate
 
-After the Bridge design lane is complete, the owner wants a separate Pittsburgh concert-venue and Blender experience using approved personal brand assets, an approved logo, approved images, and music the owner has the right to use. That future project must live in a new repository and asset workspace. Do not mix it into Bridge, do not copy a whole personal file tree, and do not upload an album or audio files until the owner explicitly provides the selected assets and confirms the distribution rights and intended audience.
+After the Bridge design lane is complete, the owner wants a separate Pittsburgh concert-venue and Blender experience. The concept should include:
+
+- a cinematic venue built in Blender with the owner's approved logo and color system;
+- a recognizable Pittsburgh setting outside the venue, with skyline, bridges, river/industrial cues, weather, lighting, and a packed crowd;
+- interactive crowd and venue moments that feel alive rather than a static render;
+- a performer avatar based only on owner-selected reference images, with no inference from unrelated personal files;
+- an album-length performance experience using only audio the owner explicitly supplies or authorizes for this project;
+- a separate public preview and repository, with large media files kept out of Bridge and out of the Git history.
+
+Do not mix this project into Bridge, do not copy a whole personal file tree, and do not upload an album, audio files, or personal imagery until the owner explicitly provides the selected assets and confirms the distribution rights and intended audience. The owner wants this queued after Bridge, not implemented inside this repository.

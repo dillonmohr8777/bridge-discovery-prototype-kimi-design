@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Bridge Signal Exchange | Redesign Preview</title>
+  <link rel="icon" href="/assets/bridge-mark.svg" type="image/svg+xml">
+  <link rel="preload" as="image" href="/assets/bridge-midatlantic-3d-v1.webp" type="image/webp">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/signal-v2.css">
+</head>
+<body class="signal-page" data-page="signal">
+  <a class="skip-link" href="#main">Skip to Signal Exchange</a>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a aria-label='Bridge prototype suite' class='brand' href='/'><img src="/assets/bridge-mark.svg" alt=""><span class="logo-word">BRIDGE</span></a>
+      <nav class="primary-nav" aria-label="Prototype suite">
+        <a href='/community'><span class="nav-icon">⌂</span><span>Community</span></a>
+        <a href='/studio'><span class="nav-icon">✦</span><span>Create</span></a>
+        <a href='/business'><span class="nav-icon">▦</span><span>Business</span></a>
+        <a class='active' href='/signal-v2' aria-current="page"><span class="nav-icon">⌁</span><span>Exchange</span></a>
+        <a href='/'><span class="nav-icon">↗</span><span>Overview</span></a>
+      </nav>
+      <div class="sidebar-footer"><div class="sidebar-status"><strong>Recommended expansion</strong><span>Market pulse → opportunity match → permissioned introduction</span></div></div>
+    </aside>
+
+    <main class="app-main" id="main">
+      <header class="topbar">
+        <a class='mobile-brand' href='/' aria-label='Bridge home'><img src="/assets/bridge-mark.svg" alt=""><span class="logo-word">BRIDGE</span></a>
+        <label class="searchbox"><span aria-hidden="true">⌕</span><input type="search" placeholder="Search opportunities, markets, or signals" aria-label="Search Signal Exchange"></label>
+        <div class="top-actions">
+          <span class="badge dark">Strategic concept</span>
+          <button class="button primary small" type="button" data-toast="Signal builder opened|Verified businesses can propose a market question for Bridge review.">Ask the network</button>
+          <button class="avatar-button" type="button" data-toast="Pro intelligence|Harbor Botanicals has access to aggregated cohorts and opportunity matching."><span class="avatar rose">HB</span><span><strong>Harbor Botanicals</strong><small>Intelligence Pro</small></span></button>
+        </div>
+      </header>
+
+      <div class="page">
+        <header class="page-head">
+          <div><p class="eyebrow">Signal Exchange concept</p><h1>See the market move. Meet the right people next.</h1><p>Signal Exchange turns privacy-conscious community intelligence into qualified opportunities for verified businesses.</p></div>
+          <button class="button ghost" type="button" data-toast="Prototype methodology|Future signals require a named source, qualified cohort, geography, threshold, and collection window.">View methodology</button>
+        </header>
+
+        <section class="exchange-grid" aria-label="Regional pulse and opportunity matches">
+          <div class="pulse-map-shell">
+            <div class="pulse-map">
+              <div class="pulse-live-map" id="signalLiveMap" aria-label="Interactive Google 3D map for Bridge regional discovery" aria-hidden="true"></div>
+              <img class="pulse-map-render" src="/assets/bridge-midatlantic-3d-v1.webp" alt="Illustrative regional discovery map from Virginia through Massachusetts">
+              <div class="pulse-title"><p class="eyebrow">Regional discovery · Prototype view</p><h2>Explore verified markets by city</h2><p class="muted">Choose a city for jurisdiction context and local business discovery.</p></div>
+              <div class="market-node-layer" aria-label="City map controls">
+                <button class="market-node richmond" type="button" aria-pressed="false" data-market="Richmond, VA|Virginia jurisdiction|Verified business discovery" data-map-query="cannabis businesses in Richmond Virginia" data-lat="37.5407" data-lng="-77.4360" data-range="10500" data-heading="24"><span><strong>Richmond</strong><small>Virginia</small></span></button>
+                <button class="market-node baltimore active" type="button" aria-pressed="true" data-market="Baltimore, MD|Maryland jurisdiction|Verified business discovery" data-map-query="cannabis businesses in Baltimore Maryland" data-lat="39.2904" data-lng="-76.6122" data-range="9000" data-heading="18"><span><strong>Baltimore</strong><small>Maryland</small></span></button>
+                <button class="market-node newark" type="button" aria-pressed="false" data-market="Newark, NJ|New Jersey jurisdiction|Verified business discovery" data-map-query="cannabis businesses in Newark New Jersey" data-lat="40.7357" data-lng="-74.1724" data-range="8500" data-heading="332"><span><strong>Newark</strong><small>New Jersey</small></span></button>
+                <button class="market-node boston" type="button" aria-pressed="false" data-market="Boston, MA|Massachusetts jurisdiction|Verified business discovery" data-map-query="cannabis businesses in Boston Massachusetts" data-lat="42.3601" data-lng="-71.0589" data-range="9000" data-heading="28"><span><strong>Boston</strong><small>Massachusetts</small></span></button>
+              </div>
+              <span class="map-model-note" id="signalMapStatus">Preparing 3D regional view</span>
+            </div>
+            <div class="signal-city-detail" aria-live="polite">
+              <div><p class="eyebrow">Jurisdiction context</p><h3 id="selectedMarketName">Baltimore, MD</h3><p><span id="selectedMarketSignal">Maryland jurisdiction</span> · <span id="selectedMarketSample">Verified business discovery</span></p><small>This prototype visualizes geography only. Google listings are external, and Bridge verification remains separate.</small></div>
+              <a class="button primary" id="signalGoogleMap" href="https://www.google.com/maps/search/?api=1&amp;query=cannabis%20businesses%20in%20Baltimore%20Maryland" target="_blank" rel="noopener noreferrer"><span id="signalGoogleMapLabel">Open Baltimore in Google Maps</span><span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+
+          <aside class="opportunity-list" aria-label="Matched opportunities">
+            <div class="section-head"><div><p class="eyebrow">Illustrative matches</p><h2>Example qualified openings</h2></div><span class="badge dark">Concept data</span></div>
+
+            <article class="opportunity">
+              <div class="opportunity-top"><span class="badge verified">✓ Verified retailer</span><span class="badge fit">92% fit</span></div>
+              <h3>Education-first retail partnership</h3>
+              <p>Common Ground is seeking Maryland brands with useful staff and consumer education assets.</p>
+              <div class="match-meter"><small>Fit based on market, verification, and stated goals</small><div class="match-track" role="img" aria-label="92 percent fit"><span style="width:92%"></span></div></div>
+              <button class="button primary" type="button" data-intro="Common Ground Dispensary">Request verified introduction</button>
+            </article>
+
+            <article class="opportunity">
+              <div class="opportunity-top"><span class="badge verified">✓ Verified event</span><span class="badge fit">84% fit</span></div>
+              <h3>Responsible education panel</h3>
+              <p>Maryland Industry Week needs one processor and one retailer for an adult-education session.</p>
+              <div class="match-meter"><small>Fit based on expertise and audience</small><div class="match-track" role="img" aria-label="84 percent fit"><span style="width:84%"></span></div></div>
+              <button class="button ghost" type="button" data-intro="Maryland Industry Week">Express interest</button>
+            </article>
+
+            <article class="opportunity">
+              <div class="opportunity-top"><span class="badge verified">✓ Verified processor</span><span class="badge fit">78% fit</span></div>
+              <h3>Newark co-packing capacity</h3>
+              <p>Garden State Botanica has small-batch co-packing capacity open for a New Jersey brand partner.</p>
+              <div class="match-meter"><small>Fit based on capacity, market, and license class</small><div class="match-track" role="img" aria-label="78 percent fit"><span style="width:78%"></span></div></div>
+              <button class="button ghost" type="button" data-intro="Garden State Botanica">Express interest</button>
+            </article>
+          </aside>
+        </section>
+
+        <section class="exchange-lower" aria-label="Signal Exchange capabilities">
+          <article class="dark-panel">
+            <p class="eyebrow">Ask</p><h2>Ask a better market question.</h2><p>Verified businesses propose short questions. Bridge reviews wording, sampling, privacy, and market eligibility before a signal goes live.</p>
+            <button class="button ghost small" type="button" data-toast="Question draft started|The review flow checks neutrality, privacy, targeting, and minimum cohort size.">Draft a question</button>
+          </article>
+          <article class="dark-panel">
+            <p class="eyebrow">Understand</p><h2>Know what the data can support.</h2><p>Every result includes sample size, geography, time window, cohort threshold, and a plain-language note about limitations.</p>
+            <button class="button ghost small" type="button" data-toast="Cohort controls opened|Identity-level filtering is unavailable by design.">Explore cohorts</button>
+          </article>
+          <article class="dark-panel">
+            <p class="eyebrow">Act</p><h2>Move from signal to permission.</h2><p>Bridge suggests verified organizations with compatible goals, then requests consent before any private contact information changes hands.</p>
+            <button class="button ghost small" type="button" data-toast="Match logic opened|Matches explain their source and never guarantee a commercial outcome.">Review match logic</button>
+          </article>
+        </section>
+
+        <section class="dark-panel" style="margin-top:20px" aria-labelledby="exchange-feed-title">
+          <div class="section-head"><div><p class="eyebrow">Illustrative signal ledger</p><h2 id="exchange-feed-title">How qualified cohorts could read</h2></div><button class="button ghost small" type="button" data-toast="Signal view saved|You will be notified when a qualified cohort is available.">Save view</button></div>
+          <div class="compact-list">
+            <div class="list-row"><span class="avatar">ED</span><div><strong>Education beats discounting for first-trial consideration</strong><small>Maryland consumers · n=1,284 · 30-day window · minimum cohort met</small></div><span class="badge trend-up"><span aria-hidden="true">▲</span> Rising</span></div>
+            <div class="list-row"><span class="avatar rose">RT</span><div><strong>Retailers are seeking vendor-ready staff training tools</strong><small>Verified retailers · Mid-Atlantic · n=146 · B2B signal</small></div><span class="badge trend-open"><span aria-hidden="true">◆</span> Opportunity</span></div>
+            <div class="list-row"><span class="avatar green">OP</span><div><strong>License renewal support remains the top admin friction</strong><small>Verified businesses · n=208 · anonymous operational pulse</small></div><span class="badge trend-steady"><span aria-hidden="true">→</span> Persistent</span></div>
+          </div>
+        </section>
+
+        <nav class="route-handoff" aria-label="Continue through Bridge">
+          <a class="route-handoff-home" href="/"><span>Bridge overview</span><strong>See the full connected platform</strong></a>
+          <a class="route-handoff-next" href="/community"><span>Return to Community</span><strong>Bring market learning back to the people behind it.</strong><small>Participate in the next private signal and reconnect with the network.</small></a>
+        </nav>
+      </div>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"><strong></strong><span></span></div>
+  <script src="/app-v2.js"></script>
+</body>
+</html>

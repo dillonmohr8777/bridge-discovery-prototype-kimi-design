@@ -1,0 +1,50 @@
+/* Signal Exchange design polish pass */
+.badge { min-height: 26px; font-size: 11px; white-space: nowrap; }
+.button.small { font-size: 12px; }
+.map-model-note { font-size: 11px; }
+.avatar-button small { font-size: 12px; }
+.section-head .badge { flex: none; }
+
+.badge.fit {
+  border-color: rgba(185, 131, 255, .3);
+  background: rgba(157, 92, 255, .16);
+  color: #dcc6ff;
+  font-variant-numeric: tabular-nums;
+}
+
+.badge.trend-up { border-color: rgba(126, 226, 177, .28); background: rgba(35, 138, 104, .2); color: #7ee2b1; }
+.badge.trend-open { border-color: rgba(185, 131, 255, .28); background: rgba(157, 92, 255, .16); color: #dcc6ff; }
+.badge.trend-steady { border-color: rgba(247, 205, 138, .28); background: rgba(168, 100, 0, .2); color: #f7cd8a; }
+
+.match-meter .match-track { height: 6px; border-radius: 999px; background: #25202a; overflow: hidden; }
+.match-meter .match-track span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #9d5cff, #7c3aed); }
+
+.exchange-lower .dark-panel { display: flex; flex-direction: column; align-items: flex-start; }
+.exchange-lower .dark-panel p { margin-bottom: 18px; }
+.exchange-lower .dark-panel .button { margin-top: auto; }
+
+.signal-page .list-row > div { flex: 1; min-width: 0; }
+.signal-page .list-row small { font-variant-numeric: tabular-nums; }
+
+.signal-page :focus-visible,
+.landing :focus-visible { outline-color: rgba(185, 131, 255, .85); }
+
+@media (min-width: 901px) {
+  .opportunity-list { position: sticky; top: calc(var(--header-height) + 20px); }
+  /* Let the map fill the column so it matches the opportunity rail height */
+  .pulse-map-shell { align-content: stretch; grid-template-rows: minmax(540px, 1fr) auto; }
+  .pulse-map { height: 100%; }
+}
+
+/* 681-900px: the topbar previously overflowed (clipped logo, wrapped chips). */
+@media (max-width: 900px) {
+  .topbar { gap: 12px; }
+  .mobile-brand { flex: none; }
+  .searchbox { flex: 1; width: auto; min-width: 0; }
+  .avatar-button strong, .avatar-button small { display: none; }
+  .avatar-button { padding-right: 5px; }
+}
+
+@media print {
+  .motion-ready .reveal-ready { opacity: 1 !important; transform: none !important; }
+}

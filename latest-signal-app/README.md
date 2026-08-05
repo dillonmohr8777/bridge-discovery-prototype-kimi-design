@@ -18,8 +18,8 @@ This folder contains the authoritative Bridge prototype source recovered from th
 - Production review URL: `https://bridge-connected-signal.netlify.app`
 - Netlify project: `bridge-connected-signal`
 - Netlify site ID: `3087fe90-74de-40ee-b4dc-042afe1bc8ae`
-- Current Phase 2 deploy: `6a72b30619a971a6adad683b`
-- Deployed site source commit: `3ddf6b0`
+- Current Phase 2 deploy: `6a72bd466f5d1047322165bb`
+- Deployed site source commit: `b2315e5`
 
 This is the officially branded five-route connected review suite. The `bridge-preview-current`, `bridge-preview-network`, and `bridge-preview-botanical` sites remain provisional direction comparisons and are not the unified target.
 

@@ -1,6 +1,6 @@
 # Bridge Unified Phase 2 Deployment Record
 
-**Deployed:** August 4, 2026  
+**Deployed:** August 5, 2026
 **Environment:** Existing unified Bridge review site  
 **Status:** Live and verified
 
@@ -9,11 +9,11 @@
 - URL: `https://bridge-connected-signal.netlify.app`
 - Netlify project: `bridge-connected-signal`
 - Netlify site ID: `3087fe90-74de-40ee-b4dc-042afe1bc8ae`
-- Production deploy ID: `6a72b30619a971a6adad683b`
-- Deploy permalink: `https://6a72b30619a971a6adad683b--bridge-connected-signal.netlify.app`
-- Deployed site source commit: `3ddf6b0`
+- Production deploy ID: `6a72bd466f5d1047322165bb`
+- Deploy permalink: `https://6a72bd466f5d1047322165bb--bridge-connected-signal.netlify.app`
+- Deployed site source commit: `b2315e5`
 - GitHub repository: `dillonmohr8777/bridge-discovery-prototype-kimi-design`
-- Previous production deploy retained for rollback: `6a72aec5a2b052071f4701c1`
+- Previous production deploy retained for rollback: `6a72b30619a971a6adad683b`
 
 The target was resolved from two current sources before deployment: the authenticated Netlify account returned the exact site ID and URL, and the July 27 Bridge deliverables register identified `bridge-connected-signal.netlify.app` as the officially branded five-route connected suite. The three `bridge-preview-*` sites are provisional direction comparisons and were not changed.
 
@@ -31,7 +31,8 @@ The verified static `site/` package and Netlify function folder were uploaded di
 - My Profile hid protected fields in Public view.
 - Explore exposed all 50 states and D.C.; California produced a clearly labeled no-sample-data state, and Maryland returned three illustrative records.
 - Explore retained honest coverage language: the geographic selector is nationwide while the current prototype records span four states.
-- The Boston market control updated the regional context while retaining the polished illustrative map fallback.
+- A five-view 3D theater now includes the corridor plus Maryland, Massachusetts, New Jersey, and Virginia, with every scene explicitly labeled as illustrative.
+- The state selector and 3D theater synchronized in both directions; a state without a bespoke render preserved its filter while returning the theater to the corridor overview.
 - The final clean browser session reported no console warnings or errors.
 
 ## Production-only correction

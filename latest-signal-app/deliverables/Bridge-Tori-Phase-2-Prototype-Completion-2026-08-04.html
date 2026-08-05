@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bridge | Tori Phase 2 Prototype Completion</title>
+  <style>
+    @font-face { font-family: Poppins; src: url("../site/assets/fonts/poppins-700-latin.woff2") format("woff2"); font-weight: 700; }
+    @font-face { font-family: Montserrat; src: url("../site/assets/fonts/montserrat-latin.woff2") format("woff2"); font-weight: 400 900; }
+    @font-face { font-family: Inter; src: url("../site/assets/fonts/inter-latin.woff2") format("woff2"); font-weight: 400 900; }
+    :root {
+      --ink: #120d18;
+      --muted: #6c6473;
+      --paper: #ffffff;
+      --soft: #f7f2fb;
+      --line: #e5dcea;
+      --purple: #6e10b7;
+      --violet: #9d4edd;
+      --lilac: #d7b5f5;
+      --night: #08050d;
+      --plum: #1a0924;
+      --green: #0b7251;
+      --amber: #8a5b08;
+      --rose: #9f285b;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #cbc5d1; color: var(--ink); font-family: Inter, Arial, sans-serif; }
+    @page { size: Letter; margin: 0; }
+    .page {
+      position: relative;
+      width: 8.5in;
+      height: 11in;
+      margin: 0 auto 18px;
+      overflow: hidden;
+      padding: .58in .64in .54in;
+      background: var(--paper);
+      page-break-after: always;
+    }
+    .page:last-child { page-break-after: auto; }
+    .dark {
+      color: white;
+      background:
+        radial-gradient(circle at 89% 9%, rgba(127,25,201,.58), transparent 30%),
+        radial-gradient(circle at 16% 82%, rgba(65,5,101,.7), transparent 38%),
+        linear-gradient(150deg, #07040b 0%, #100717 52%, #060408 100%);
+    }
+    .dark::after {
+      content: "";
+      position: absolute;
+      width: 5.2in;
+      height: 5.2in;
+      right: -2.35in;
+      top: -1.75in;
+      border: 1px solid rgba(214,174,255,.24);
+      border-radius: 50%;
+      box-shadow: 0 0 0 .6in rgba(157,78,221,.06), 0 0 0 1.2in rgba(157,78,221,.03);
+      pointer-events: none;
+    }
+    h1, h2, h3 { margin: 0; font-family: Poppins, Montserrat, sans-serif; }
+    h1 { font-size: 43px; line-height: .98; letter-spacing: -1.9px; }
+    h2 { font-size: 27px; line-height: 1.06; letter-spacing: -.9px; }
+    h3 { font-size: 13px; line-height: 1.24; }
+    p { margin: 7px 0; font-size: 9.4px; line-height: 1.48; }
+    ul { margin: 6px 0 0; padding-left: 15px; }
+    li { margin: 3.5px 0; font-size: 8.8px; line-height: 1.4; }
+    .lead { max-width: 6.4in; color: #4a424f; font-size: 12.4px; line-height: 1.5; }
+    .dark .lead { color: #e2d9e8; }
+    .kicker { color: var(--purple); font: 800 8px/1.2 Montserrat, sans-serif; letter-spacing: 1.75px; text-transform: uppercase; }
+    .dark .kicker { color: #d5a4ff; }
+    .accent { color: #b66cff; }
+    .rule { width: 62px; height: 3px; margin: 11px 0 15px; border-radius: 3px; background: var(--purple); }
+    .lockup { position: relative; z-index: 2; display: flex; align-items: center; gap: 11px; }
+    .lockup img { width: 56px; height: 42px; }
+    .lockup strong { font: 900 23px/1 Montserrat, sans-serif; letter-spacing: 2.8px; }
+    .lockup small { display: block; margin-top: 6px; color: #c690f2; font: 800 7px/1 Montserrat, sans-serif; letter-spacing: 2px; }
+    .cover-copy { position: relative; z-index: 2; max-width: 6.7in; margin-top: .8in; }
+    .cover-copy h1 { max-width: 6.3in; margin-top: 12px; font-size: 48px; }
+    .cover-shot { position: relative; z-index: 2; width: 100%; height: 2.82in; margin-top: .38in; overflow: hidden; border: 1px solid rgba(255,255,255,.18); border-radius: 17px; background: #100617; box-shadow: 0 30px 72px rgba(0,0,0,.38); }
+    .cover-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .cover-shot::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(7,3,10,.72)); }
+    .meta-row { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: .32in; }
+    .meta { padding-top: 9px; border-top: 1px solid rgba(255,255,255,.22); }
+    .meta span { display: block; color: #a99eb0; font-size: 7px; letter-spacing: 1.1px; text-transform: uppercase; }
+    .meta strong { display: block; margin-top: 4px; font-size: 9px; line-height: 1.35; }
+    .footer { position: absolute; left: .64in; right: .64in; bottom: .22in; display: flex; justify-content: space-between; color: #8e8594; font-size: 7px; letter-spacing: .75px; text-transform: uppercase; }
+    .dark .footer { color: #9c8ca7; }
+    .status-band { display: grid; grid-template-columns: repeat(4,1fr); gap: 9px; margin: 16px 0; }
+    .stat { min-height: 75px; padding: 11px; border-radius: 12px; background: var(--night); color: white; }
+    .stat strong { display: block; color: #c57dff; font: 700 21px/1 Poppins, sans-serif; }
+    .stat span { display: block; margin-top: 6px; color: #c9becf; font-size: 7.1px; line-height: 1.28; letter-spacing: .75px; text-transform: uppercase; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+    .card { padding: 13px; border: 1px solid var(--line); border-radius: 13px; background: white; break-inside: avoid; }
+    .card h3 { margin-bottom: 4px; color: var(--purple); }
+    .card.purple { border-color: #d5b3ee; background: linear-gradient(150deg,#fcfaff,#f3e9fa); }
+    .card.dark-card { border-color: #2e2532; background: #17121a; color: white; }
+    .card.dark-card h3 { color: #c477ff; }
+    .card.dark-card p, .card.dark-card li { color: #e0d8e4; }
+    .quote { margin: 14px 0; padding: 15px 17px; border-left: 4px solid var(--purple); border-radius: 0 12px 12px 0; background: var(--soft); color: #2b1735; font: 700 14px/1.34 Poppins, sans-serif; }
+    .callout { margin-top: 11px; padding: 11px 13px; border: 1px solid #cba8e6; border-radius: 11px; background: #f8f1fc; }
+    .callout strong { color: var(--purple); }
+    .screen-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; margin-top: 15px; }
+    .screen { overflow: hidden; border: 1px solid #d8cedd; border-radius: 13px; background: #f5f0f7; box-shadow: 0 12px 30px rgba(35,12,48,.11); }
+    .screen img { display: block; width: 100%; height: 2.7in; object-fit: cover; object-position: top; }
+    .screen figcaption { min-height: .74in; padding: 10px 12px; }
+    .screen figcaption strong { display: block; color: var(--purple); font: 700 11px/1.2 Poppins, sans-serif; }
+    .screen figcaption span { display: block; margin-top: 4px; color: var(--muted); font-size: 7.8px; line-height: 1.35; }
+    .screen.wide { grid-column: 1/-1; }
+    .screen.wide img { height: 3.25in; }
+    table { width: 100%; margin-top: 10px; border-collapse: collapse; }
+    th { padding: 7px; background: #19141c; color: white; font-size: 7.4px; line-height: 1.3; letter-spacing: .65px; text-align: left; text-transform: uppercase; }
+    td { padding: 7px; border-bottom: 1px solid var(--line); font-size: 7.8px; line-height: 1.33; vertical-align: top; }
+    tr:nth-child(even) td { background: #fbf9fc; }
+    .label { display: inline-block; padding: 3px 6px; border-radius: 9px; font-size: 6.6px; font-weight: 900; letter-spacing: .55px; text-transform: uppercase; }
+    .done { background: #ddf3e9; color: var(--green); }
+    .decision { background: #fff0ce; color: var(--amber); }
+    .future { background: #f3dce7; color: var(--rose); }
+    .route-map { margin: 13px 0; padding: 15px; border-radius: 14px; background: linear-gradient(125deg,#16091e,#3f075c); color: white; }
+    .route-map > div { display: grid; grid-template-columns: 1.15fr repeat(4,1fr); gap: 8px; align-items: center; }
+    .route-node { min-height: 48px; display: grid; place-items: center; padding: 8px; border: 1px solid rgba(255,255,255,.19); border-radius: 10px; background: rgba(255,255,255,.07); text-align: center; }
+    .route-node strong { font-size: 9px; }
+    .route-node span { display: block; margin-top: 3px; color: #d2c3da; font-size: 6.6px; }
+    .phase-row { display: grid; grid-template-columns: 38px 1fr 74px; gap: 10px; align-items: start; padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .phase-row:last-child { border-bottom: 0; }
+    .phase-num { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; background: var(--purple); color: white; font: 700 12px/1 Poppins, sans-serif; }
+    .phase-row p { margin: 2px 0 0; }
+    .phase-row .label { justify-self: end; margin-top: 2px; }
+    .action { display: grid; grid-template-columns: 30px 1fr; gap: 9px; margin: 9px 0; align-items: start; }
+    .action b { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 8px; background: var(--soft); color: var(--purple); font-size: 9px; }
+    .action p { margin: 0; }
+    .owner-band { margin: 12px 0; padding: 13px 15px; border-radius: 12px; background: linear-gradient(120deg,#240033,#6e10b7); color: white; }
+    .owner-band p { color: #eee5f2; }
+    .evidence { display: grid; grid-template-columns: 1fr auto; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+    .evidence:last-child { border-bottom: 0; }
+    .evidence strong { display: block; font-size: 9px; }
+    .evidence span { display: block; margin-top: 3px; color: var(--muted); font-size: 7.5px; line-height: 1.35; }
+    .check { align-self: center; color: var(--green); font: 900 15px/1 Poppins, sans-serif; }
+    .source-note { margin-top: 11px; color: #756d7a; font-size: 7.1px; line-height: 1.42; }
+    @media print { html, body { background: white; } .page { margin: 0; } }
+  </style>
+</head>
+<body>
+  <section class="page dark">
+    <div class="lockup"><img src="../site/assets/bridge-mark.svg" alt=""><div><strong>BRIDGE</strong><small>ONE INDUSTRY. ONE NETWORK. ONE BRIDGE.</small></div></div>
+    <div class="cover-copy">
+      <div class="kicker">Flagship completion handoff</div>
+      <h1>Tori's <span class="accent">Phase 2</span><br>prototype, finished.</h1>
+      <p class="lead">A source-grounded record of what changed, how the complete 39-minute feedback review now appears in the product, what Phase 2 deliverables are ready, and what Dillon still needs to drive.</p>
+    </div>
+    <div class="cover-shot"><img src="assets/home-desktop.png" alt="Bridge completed Home prototype"></div>
+    <div class="meta-row">
+      <div class="meta"><span>Prepared</span><strong>August 4, 2026</strong></div>
+      <div class="meta"><span>Source basis</span><strong>Tori review, July 23<br>Approx. 39 minutes</strong></div>
+      <div class="meta"><span>Slack destination</span><strong>#bridge-software-development<br>Attachment ready, not posted</strong></div>
+    </div>
+    <div class="footer"><span>Bridge Software | Phase 2 prototype completion</span><span>01</span></div>
+  </section>
+
+  <section class="page">
+    <div class="kicker">Executive outcome</div>
+    <h2>The feedback is now a working product system.</h2>
+    <div class="rule"></div>
+    <p class="lead">This is no longer a loose visual prototype. The five primary spaces, their responsive behavior, key role boundaries, feedback-driven interactions, and Phase 2 implementation contracts now exist together as one reviewable package.</p>
+    <div class="status-band">
+      <div class="stat"><strong>5</strong><span>Primary product spaces completed</span></div>
+      <div class="stat"><strong>24</strong><span>Material feedback themes traced</span></div>
+      <div class="stat"><strong>5</strong><span>Phase 2 definition outputs packaged</span></div>
+      <div class="stat"><strong>0</strong><span>Desktop or mobile overflow failures</span></div>
+    </div>
+    <div class="route-map">
+      <div>
+        <div class="route-node"><strong>Home</strong><span>Position + entry</span></div>
+        <div class="route-node"><strong>Community News</strong><span>Signal + feed</span></div>
+        <div class="route-node"><strong>Create</strong><span>Upload + target</span></div>
+        <div class="route-node"><strong>My Profile</strong><span>Identity + access</span></div>
+        <div class="route-node"><strong>Explore</strong><span>Find + favorite</span></div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="card purple">
+        <h3>What is complete</h3>
+        <ul>
+          <li>Clear five-space information architecture and consistent navigation.</li>
+          <li>Revised Home hierarchy with imagery, product entry, and useful market-signal framing.</li>
+          <li>Responsive news-grid and classic-feed comparison.</li>
+          <li>Promotion creation, real local asset selection, multi-audience targeting, and protected-detail guardrail.</li>
+          <li>Public/B2B profile modes, responsible contacts, and recurring confirmation concept.</li>
+          <li>Nationwide Explore filters, favorites, consumer utilities, and permissioned introductions.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>What this does not pretend</h3>
+        <ul>
+          <li>Illustrative records are not represented as live company, credential, or menu data.</li>
+          <li>Client-side states are not represented as production security.</li>
+          <li>Pricing, vendor visibility, providers, and final feed direction remain decisions.</li>
+          <li>Authentication, storage, search, email, maps, ordering, and social links still need production integration.</li>
+          <li>No deployment, Slack post, stakeholder approval, or public launch is implied.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout"><strong>Best-of-the-best standard applied:</strong> every important interaction has a visible state, sensitive information has an explicit boundary, mobile was designed rather than merely collapsed, and unresolved decisions remain clearly labeled instead of being buried inside visual polish.</div>
+    <div class="footer"><span>Bridge Software | Executive outcome</span><span>02</span></div>
+  </section>
+
+  <section class="page">
+    <div class="kicker">Finished prototype | 1 of 2</div>
+    <h2>The platform now reads as one connected product.</h2>
+    <div class="rule"></div>
+    <div class="screen-grid">
+      <figure class="screen wide"><img src="assets/home-desktop.png" alt="Bridge Home"><figcaption><strong>Home</strong><span>Reduced hero dominance, clearer value, verified-network language, visual story strip, and direct entry to the four product spaces.</span></figcaption></figure>
+      <figure class="screen"><img src="assets/community-desktop.png" alt="Bridge Community News"><figcaption><strong>Community News</strong><span>Visual news grid and classic vertical feed comparison using the same content and selected-state controls.</span></figcaption></figure>
+      <figure class="screen"><img src="assets/create-desktop.png" alt="Bridge Create"><figcaption><strong>Create</strong><span>Promotion workflow with real asset selection, multi-audience targeting, protected-detail rules, and live preview state.</span></figcaption></figure>
+    </div>
+    <div class="footer"><span>Bridge Software | Finished product spaces</span><span>03</span></div>
+  </section>
+
+  <section class="page">
+    <div class="kicker">Finished prototype | 2 of 2</div>
+    <h2>Trust and discovery have real interaction depth.</h2>
+    <div class="rule"></div>
+    <div class="screen-grid">
+      <figure class="screen"><img src="assets/profile-desktop.png" alt="Bridge My Profile"><figcaption><strong>My Profile</strong><span>Verified home base, public/B2B modes, sales and accounting ownership, first-login check, and a 90-day confirmation cadence.</span></figcaption></figure>
+      <figure class="screen"><img src="assets/explore-desktop.png" alt="Bridge Explore"><figcaption><strong>Explore</strong><span>Nationwide legal-market framing, composable filters, favorites, wider service directory, consumer utility, and permissioned introductions.</span></figcaption></figure>
+    </div>
+    <div class="quote">The result keeps the deep-purple Bridge character Tori responded to, while making the product easier to scan, easier to explain, and much more credible as a role-aware industry network.</div>
+    <div class="grid-3">
+      <div class="card purple"><h3>Product-specific</h3><p>Signal context, verified identity, legal-market discovery, audience protection, and responsible contacts are part of the experience rather than generic dashboard decoration.</p></div>
+      <div class="card"><h3>Responsive</h3><p>Desktop uses the product rail and wider editorial compositions. Mobile uses a persistent four-space dock and single-column decision flow.</p></div>
+      <div class="card dark-card"><h3>Accessible states</h3><p>Selected modes expose pressed state, uploads and counts announce changes, controls have labels, and reduced-motion behavior is preserved.</p></div>
+    </div>
+    <div class="source-note">Screenshots are current local-browser captures from the completed static prototype on August 4, 2026. They are evidence of the interface package, not evidence of production integrations or a public deployment.</div>
+    <div class="footer"><span>Bridge Software | Trust and discovery</span><span>04</span></div>
+  </section>
+
+  <section class="page">
+    <div class="kicker">Transcript coverage</div>
+    <h2>Tori's material feedback is traceable to a result.</h2>
+    <div class="rule"></div>
+    <table>
+      <thead><tr><th style="width:26%">Feedback theme</th><th style="width:18%">Disposition</th><th>Implemented result or controlled decision</th></tr></thead>
+      <tbody>
+        <tr><td>Keep purple and dark Bridge character</td><td><span class="label done">Implemented</span></td><td>Official dark-purple direction preserved and formalized in DESIGN.md.</td></tr>
+        <tr><td>More imagery, motion, and hover</td><td><span class="label done">Implemented</span></td><td>Visual story strip, richer feed imagery, purposeful card motion, focus, and reduced-motion support.</td></tr>
+        <tr><td>Less giant hero type</td><td><span class="label done">Implemented</span></td><td>Bounded desktop typography and earlier product utility.</td></tr>
+        <tr><td>Do not reject marketing metrics</td><td><span class="label done">Implemented</span></td><td>Privacy-conscious, useful insight language replaces metrics-negative copy.</td></tr>
+        <tr><td>Clear routes and naming</td><td><span class="label done">Implemented</span></td><td>Community News, Create, My Profile, Explore, and Home are consistent everywhere.</td></tr>
+        <tr><td>News grid versus vertical feed</td><td><span class="label decision">Approve default</span></td><td>Both responsive patterns are implemented with one-click comparison.</td></tr>
+        <tr><td>PNG/PDF/image upload and Promotion</td><td><span class="label done">Implemented</span></td><td>PNG, JPEG, WebP, and PDF picker with size/type validation and preview feedback.</td></tr>
+        <tr><td>Multiple audiences and protected detail</td><td><span class="label done">Prototyped</span></td><td>Multi-select audiences; protected content disables public targeting.</td></tr>
+        <tr><td>Sales/accounting contacts and recurring check</td><td><span class="label done">Prototyped</span></td><td>Responsible contacts, first-login prompt, dates, confirmation state, and 90-day cadence.</td></tr>
+        <tr><td>Public/member/EIN-verified separation</td><td><span class="label decision">Policy lock</span></td><td>Public/B2B views and a field-level working matrix are ready for approval.</td></tr>
+        <tr><td>Vendor-to-vendor visibility</td><td><span class="label decision">Decision</span></td><td>Deny-by-default recommendation documented; Tori, Miraj, and legal must finalize.</td></tr>
+        <tr><td>Wider services directory</td><td><span class="label done">Implemented</span></td><td>Bank, transport, lab, construction/HVAC/electrical, dispensary, and brand examples.</td></tr>
+        <tr><td>Nationwide filters and favorites</td><td><span class="label done">Implemented</span></td><td>State, category, product, brand/strain/service search, result counts, favorites, and empty state.</td></tr>
+        <tr><td>Menu, order, Apple Maps, social, Leafly</td><td><span class="label done">Prototyped</span></td><td>Consumer utility appears on a dispensary result; providers remain a production choice.</td></tr>
+        <tr><td>$349-$350 pricing</td><td><span class="label decision">Validate</span></td><td>Kept out of the UI and recorded as a hypothesis, not a final term.</td></tr>
+        <tr><td>Two-sided launch and major brands</td><td><span class="label decision">Business work</span></td><td>Moved to launch readiness and network-density planning.</td></tr>
+        <tr><td>Do not rush</td><td><span class="label done">Governed</span></td><td>Explicit stakeholder, data, technical, legal, test, and pilot exit gates.</td></tr>
+        <tr><td>HR idea</td><td><span class="label future">Future only</span></td><td>Excluded from Phase 2 MVP pending its own legal and privacy charter.</td></tr>
+      </tbody>
+    </table>
+    <div class="source-note">The repository contains the complete line-by-line checklist. This page condenses the major themes for Slack and stakeholder review.</div>
+    <div class="footer"><span>Bridge Software | Transcript coverage</span><span>05</span></div>
+  </section>
+
+  <section class="page">
+    <div class="kicker">Phase 2 deliverables</div>
+    <h2>All five definition outputs are now packaged.</h2>
+    <div class="rule"></div>
+    <div class="phase-row"><div class="phase-num">01</div><div><h3>Approved route and screen map candidate</h3><p>The five spaces, labels, purpose, and handoff paths are reflected in the working prototype and product contract.</p></div><span class="label done">Ready to review</span></div>
+    <div class="phase-row"><div class="phase-num">02</div><div><h3>Role, audience, and visibility matrix</h3><p>Public adult, industry member, EIN-verified business, authorized staff, and admin capabilities are defined as the working baseline.</p></div><span class="label decision">Approval needed</span></div>
+    <div class="phase-row"><div class="phase-num">03</div><div><h3>Priority journeys and acceptance criteria</h3><p>First-time discovery, feed comparison, targeted creation, profile confirmation, and nationwide discovery have testable outcomes.</p></div><span class="label done">Complete</span></div>
+    <div class="phase-row"><div class="phase-num">04</div><div><h3>Responsive unresolved-choice prototypes</h3><p>Homepage hierarchy, navigation, search, feed comparison, upload, audience rules, filters, favorites, and profile visibility exist in the same suite.</p></div><span class="label done">Complete</span></div>
+    <div class="phase-row"><div class="phase-num">05</div><div><h3>Phased backlog and decision record</h3><p>P0 lock, recommended vertical slice, network expansion, launch readiness, future HR, owners, dependencies, and exit gates are separated.</p></div><span class="label done">Complete</span></div>
+    <div class="owner-band"><h3>Recommended production vertical slice</h3><p>Targeted Promotion creation plus protected profile projection. This slice proves identity claims, uploads, audience rules, public/B2B field projection, contact confirmation, and auditability without requiring the entire nationwide marketplace first.</p></div>
+    <div class="grid-2">
+      <div class="card purple"><h3>Product package</h3><ul><li>PRODUCT.md</li><li>DESIGN.md</li><li>Phase 2 product contract</li><li>Transcript implementation checklist</li><li>Phased backlog and decision record</li></ul></div>
+      <div class="card"><h3>Engineering handoff package</h3><ul><li>Identity and authorization claims</li><li>Core entities</li><li>Required API behaviors</li><li>External integration decisions</li><li>Server-enforcement and audit expectations</li></ul></div>
+    </div>
+    <div class="callout"><strong>Phase 2 status:</strong> prototype and definition work are complete enough for a formal acceptance review. Phase 2 is not production-ready until the labeled policy and technical decisions are signed off.</div>
+    <div class="footer"><span>Bridge Software | Phase 2 deliverables</span><span>06</span></div>
+  </section>
+
+  <section class="page">
+    <div class="kicker">Trust contract</div>
+    <h2>Visibility is part of the product, not a hidden assumption.</h2>
+    <div class="rule"></div>
+    <table>
+      <thead><tr><th>Capability or data</th><th>Public adult 21+</th><th>Industry member</th><th>Verified business</th><th>Authorized staff</th><th>Admin</th></tr></thead>
+      <tbody>
+        <tr><td>Read public Community News</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+        <tr><td>Participate in eligible signal</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+        <tr><td>Create public promotion</td><td>No</td><td>Eligible creator</td><td>Yes</td><td>By permission</td><td>Yes</td></tr>
+        <tr><td>View public profile fields</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+        <tr><td>View wholesale/relationship fields</td><td>No</td><td>Decision</td><td>Scoped</td><td>By permission</td><td>Audited</td></tr>
+        <tr><td>View sales/accounting contacts</td><td>No</td><td>No by default</td><td>Scoped</td><td>By permission</td><td>Audited</td></tr>
+        <tr><td>Confirm responsible contacts</td><td>No</td><td>No</td><td>Owner/admin</td><td>By permission</td><td>Audited</td></tr>
+        <tr><td>Request protected introduction</td><td>No</td><td>Eligible</td><td>Yes</td><td>By permission</td><td>Yes</td></tr>
+        <tr><td>View EIN/source documents</td><td>No</td><td>No</td><td>Status only</td><td>Status only</td><td>Verification staff only</td></tr>
+      </tbody>
+    </table>
+    <div class="grid-2" style="margin-top:14px">
+      <div class="card dark-card"><h3>What the prototype proves</h3><ul><li>Public and verified views can be made legible to users.</li><li>Protected audience rules can prevent an obvious targeting mistake.</li><li>Contact responsibility and review cadence can live inside My Profile.</li><li>Permissioned introduction can replace automatic contact exposure.</li></ul></div>
+      <div class="card purple"><h3>What production must enforce</h3><ul><li>All protected projections and actions on the server.</li><li>Verified claims, delegated staff permissions, and organization scope.</li><li>Audits for protected reads, edits, verification, publishing, and introductions.</li><li>Deny-by-default behavior when claims or relationships are uncertain.</li></ul></div>
+    </div>
+    <div class="callout"><strong>Decision still required:</strong> the exact vendor-to-vendor field set and exceptions cannot be solved through design taste. Tori, Miraj, and legal need one field-level decision session before production work begins.</div>
+    <div class="footer"><span>Bridge Software | Role and visibility contract</span><span>07</span></div>
+  </section>
+
+  <section class="page">
+    <div class="kicker">Dillon's lane</div>
+    <h2>What still needs to come from me.</h2>
+    <div class="rule"></div>
+    <div class="owner-band"><h3>My next job is decision leadership, not more speculative screen production.</h3><p>The prototype is strong enough to force the right conversations. I need to turn those conversations into recorded approvals, owners, and one production slice.</p></div>
+    <div class="grid-2">
+      <div>
+        <div class="action"><b>01</b><p><strong>Lead Tori's route-by-route acceptance review.</strong> Capture accept, revise, or defer on every primary space.</p></div>
+        <div class="action"><b>02</b><p><strong>Lock the feed default.</strong> Have Tori choose News grid or Classic feed while preserving the alternate as evidence.</p></div>
+        <div class="action"><b>03</b><p><strong>Convene the visibility session.</strong> Bring Tori, Miraj, and legal together for fields, roles, vendor access, exceptions, and audit ownership.</p></div>
+        <div class="action"><b>04</b><p><strong>Select the vertical slice with Miraj.</strong> Confirm scope, owner, API contract, fixtures, acceptance tests, and target date.</p></div>
+      </div>
+      <div>
+        <div class="action"><b>05</b><p><strong>Approve production imagery and copy.</strong> Replace or approve any illustrative fixture before stakeholder or public use.</p></div>
+        <div class="action"><b>06</b><p><strong>Assign operations ownership.</strong> Verification, moderation, reminders, introductions, support, and escalation each need a named owner.</p></div>
+        <div class="action"><b>07</b><p><strong>Split launch workstreams.</strong> Pricing, major-brand recruitment, network density, and legal-state data are not interface subtasks.</p></div>
+        <div class="action"><b>08</b><p><strong>Protect the MVP boundary.</strong> Keep HR out until its own legal, privacy, retention, access, and non-surveillance charter exists.</p></div>
+      </div>
+    </div>
+    <div class="grid-3" style="margin-top:14px">
+      <div class="card purple"><h3>Decision artifact</h3><p>One dated accept/revise/defer record after the Tori walkthrough.</p></div>
+      <div class="card"><h3>Build artifact</h3><p>One vertical-slice brief signed by Dillon and Miraj.</p></div>
+      <div class="card dark-card"><h3>Ownership artifact</h3><p>A named operational owner for every trust-critical workflow.</p></div>
+    </div>
+    <div class="callout"><strong>Minimum meeting outcome:</strong> approved route map, chosen feed default, visibility-session date, selected vertical slice, named imagery/copy owner, and next review date.</div>
+    <div class="footer"><span>Bridge Software | Dillon-owned next actions</span><span>08</span></div>
+  </section>
+
+  <section class="page">
+    <div class="kicker">Beyond the literal feedback</div>
+    <h2>Additional Phase 2 work the product now entails.</h2>
+    <div class="rule"></div>
+    <p class="lead">Tori's review defines the experience. A responsible production path also needs the following foundations, even where the transcript did not specify implementation detail.</p>
+    <div class="grid-2">
+      <div class="card purple"><h3>Identity, privacy, and authorization</h3><ul><li>Verified server claims and delegated staff permissions.</li><li>Field-level projection rules and audit events.</li><li>Privacy notice, consent, retention, and data-access decisions.</li><li>Legal review of advertising, state coverage, verification, and introductions.</li></ul></div>
+      <div class="card"><h3>Data and integration quality</h3><ul><li>Authoritative legal-state and business sources with freshness rules.</li><li>Upload storage, malware scanning, transformation, and PDF preview.</li><li>Menu/order, maps, social, Leafly, and email provider choices.</li><li>Explicit behavior for missing, stale, conflicting, or partial fields.</li></ul></div>
+      <div class="card"><h3>Operations and safety</h3><ul><li>Verification queue, renewal, appeal, and escalation.</li><li>Content moderation, reports, takedowns, and protected-content incidents.</li><li>Contact-reminder ownership and introduction approval workflow.</li><li>Support playbook, rollback path, and launch incident ownership.</li></ul></div>
+      <div class="card dark-card"><h3>Evidence and release quality</h3><ul><li>Automated acceptance tests for every selected journey and role.</li><li>Keyboard, screen-reader, contrast, reduced-motion, zoom, and mobile regression.</li><li>Analytics definitions that separate delivery, activity, lead quality, and verified outcomes.</li><li>Pilot success criteria and network-density thresholds before public expansion.</li></ul></div>
+    </div>
+    <div class="phase-row"><div class="phase-num">P0</div><div><h3>Lock decisions</h3><p>Tori acceptance, feed default, visibility matrix, vertical slice, and ownership.</p></div><span class="label decision">Next</span></div>
+    <div class="phase-row"><div class="phase-num">P1</div><div><h3>Build the production slice</h3><p>Authentication, uploads, audience rules, profile projection, contact event, and tests.</p></div><span class="label decision">After lock</span></div>
+    <div class="phase-row"><div class="phase-num">P2</div><div><h3>Expand the discovery network</h3><p>Nationwide data, filters, favorites, provider utilities, introductions, and moderated feed.</p></div><span class="label future">Follow-on</span></div>
+    <div class="phase-row"><div class="phase-num">P3</div><div><h3>Prove launch readiness</h3><p>Network density, operations, analytics, compliance, support, pilot, and rollback.</p></div><span class="label future">Launch gate</span></div>
+    <div class="footer"><span>Bridge Software | Additional Phase 2 implications</span><span>09</span></div>
+  </section>
+
+  <section class="page">
+    <div class="kicker">Verification and handoff</div>
+    <h2>Reviewable evidence, clean boundaries, clear next move.</h2>
+    <div class="rule"></div>
+    <div class="grid-2">
+      <div>
+        <div class="evidence"><div><strong>Structural package</strong><span>Six route files, 18 required site files, and the Netlify function contract passed the repository verifier.</span></div><div class="check">✓</div></div>
+        <div class="evidence"><div><strong>JavaScript integrity</strong><span>The completed app-v2.js parses successfully with Node syntax checking.</span></div><div class="check">✓</div></div>
+        <div class="evidence"><div><strong>Desktop route QA</strong><span>Home, Community News, Create, My Profile, and Explore were inspected in the Codex in-app browser at 1440-pixel desktop width.</span></div><div class="check">✓</div></div>
+        <div class="evidence"><div><strong>Mobile route QA</strong><span>All five primary routes were inspected at 390 by 844 with zero horizontal document overflow.</span></div><div class="check">✓</div></div>
+        <div class="evidence"><div><strong>Interaction proof</strong><span>Feed switching, real local upload, protected audience behavior, profile confirmation/public mode, Explore filtering, and Favorites only were exercised.</span></div><div class="check">✓</div></div>
+        <div class="evidence"><div><strong>Deterministic design scan</strong><span>Only incumbent local Bridge font families were warned; no change was made because they are intentional brand assets used with Poppins display hierarchy.</span></div><div class="check">✓</div></div>
+      </div>
+      <div class="card dark-card">
+        <h3>Current completion boundary</h3>
+        <ul>
+          <li>Prototype implementation: complete locally.</li>
+          <li>Phase 2 product/design contracts: complete.</li>
+          <li>Slack-ready PDF: complete.</li>
+          <li>Stakeholder acceptance: pending review.</li>
+          <li>Production integrations: pending decisions and engineering.</li>
+          <li>Public deployment: not attempted because an exact existing Netlify site mapping was not verified in this package.</li>
+          <li>Slack posting: not performed without delivery approval.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="quote">Recommended Slack message: Tori's complete Phase 2 prototype pass is ready. The attached PDF shows what changed, how the feedback maps to the finished product, the decisions still needed, and the exact next actions I own.</div>
+    <div class="callout"><strong>Next move:</strong> share this attachment in #bridge-software-development, schedule the acceptance review, and leave that review with six dated decisions rather than another open-ended round of feedback.</div>
+    <p class="source-note">Source basis: the July 23, 2026 Tori review transcript summary, approved Bridge source package, current authoritative prototype repository, and the canonical Phase 2-and-beyond plan. Illustrative prototype records remain clearly separated from verified external facts.</p>
+    <div class="footer"><span>Bridge Software | Verification and handoff</span><span>10</span></div>
+  </section>
+</body>
+</html>

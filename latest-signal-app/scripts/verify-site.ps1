@@ -11,9 +11,11 @@ $required = @(
   'signal\index.html',
   'styles.css',
   'app.js',
+  'app-v2.js',
   'assets\bridge-branding-guide.png',
   'assets\bridge-network-night.webp',
   'assets\bridge-mark.svg',
+  'assets\nav-icons.svg',
   'assets\bridge-midatlantic-3d-v1.webp',
   'assets\fonts\inter-latin.woff2',
   'assets\fonts\montserrat-latin.woff2',
@@ -55,6 +57,24 @@ foreach ($file in $routeFiles) {
   if ($html -match 'fonts\.googleapis\.com|fonts\.gstatic\.com') { throw "$($file.FullName) still depends on a remote font stylesheet." }
   if ($html -notmatch 'href="/styles\.css"') { throw "$($file.FullName) is missing the shared Bridge stylesheet." }
   if ($html -notmatch 'noindex, nofollow') { throw "$($file.FullName) is missing prototype noindex metadata." }
+}
+
+$phaseTwoChecks = @{
+  'Home visual story' = @{ Path = 'index.html'; Pattern = 'class="visual-story"' }
+  'Community feed comparison' = @{ Path = 'community\index.html'; Pattern = 'data-feed-layout' }
+  'Create asset upload' = @{ Path = 'studio\index.html'; Pattern = 'id="assetUpload"' }
+  'Create protected audience rule' = @{ Path = 'studio\index.html'; Pattern = 'id="sensitiveContent"' }
+  'Profile contact confirmation' = @{ Path = 'business\index.html'; Pattern = 'class="contact-review"' }
+  'Explore nationwide filters' = @{ Path = 'signal\index.html'; Pattern = 'id="exploreState"' }
+  'Explore favorites' = @{ Path = 'signal\index.html'; Pattern = 'id="exploreFavorites"' }
+}
+
+foreach ($check in $phaseTwoChecks.GetEnumerator()) {
+  $checkPath = Join-Path $site $check.Value.Path
+  $checkText = Get-Content -Raw -Encoding UTF8 $checkPath
+  if ($checkText -notmatch $check.Value.Pattern) {
+    throw "Missing Phase 2 contract: $($check.Key) in $($check.Value.Path)."
+  }
 }
 
 $css = Get-Content -Raw -Encoding UTF8 (Join-Path $site 'styles.css')

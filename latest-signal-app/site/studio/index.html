@@ -12,12 +12,12 @@
   <div class="app-shell">
     <aside class="sidebar">
       <a aria-label='Bridge prototype suite' class='brand' href='/'><img src="/assets/bridge-mark.svg" alt=""><span class="logo-word">BRIDGE</span></a>
-      <nav class="primary-nav" aria-label="Prototype suite">
-        <a href='/community'><span class="nav-icon">⌂</span><span>Community</span></a>
-        <a class='active' href='/studio' aria-current="page"><span class="nav-icon">✦</span><span>Create</span></a>
-        <a href='/business'><span class="nav-icon">▦</span><span>Business</span></a>
-        <a href='/signal'><span class="nav-icon">⌁</span><span>Exchange</span></a>
-        <a href='/'><span class="nav-icon">↗</span><span>Overview</span></a>
+      <nav class="primary-nav" aria-label="Bridge navigation">
+        <a href='/community'><svg class="nav-icon" aria-hidden="true"><use href="/assets/nav-icons.svg#news"></use></svg><span>Community News</span></a>
+        <a class='active' href='/studio' aria-current="page"><svg class="nav-icon" aria-hidden="true"><use href="/assets/nav-icons.svg#create"></use></svg><span>Create</span></a>
+        <a href='/business'><svg class="nav-icon" aria-hidden="true"><use href="/assets/nav-icons.svg#profile"></use></svg><span>My Profile</span></a>
+        <a href='/signal'><svg class="nav-icon" aria-hidden="true"><use href="/assets/nav-icons.svg#explore"></use></svg><span>Explore</span></a>
+        <a href='/'><svg class="nav-icon" aria-hidden="true"><use href="/assets/nav-icons.svg#home"></use></svg><span>Home</span></a>
       </nav>
       <div class="sidebar-footer"><div class="sidebar-status"><strong>Compliant creative</strong><span>Audience, market, license, and claims checked before publish</span></div></div>
     </aside>
@@ -25,7 +25,7 @@
     <main class="app-main" id="main">
       <header class="topbar">
         <a class='mobile-brand' href='/' aria-label='Bridge home'><img src="/assets/bridge-mark.svg" alt=""><span class="logo-word">BRIDGE</span></a>
-        <span class="badge">AI Campaign Studio</span>
+        <span class="badge">Create · Campaign Studio</span>
         <div class="top-actions">
           <button class="button secondary small" type="button" data-toast="Draft saved|Campaign version 4 is saved to Harbor Botanicals.">Save draft</button>
           <button class="button primary small" type="button" id="publishButton">Route to review</button>
@@ -42,17 +42,30 @@
 
             <div class="control-section">
               <h2>Campaign brief</h2>
-              <div class="field"><label for="campaignType">Objective</label><select id="campaignType"><option>Retail education</option><option>Product introduction</option><option>Vendor announcement</option><option>Event awareness</option></select></div>
+              <div class="field"><label for="campaignType">Post type</label><select id="campaignType"><option>Promotion</option><option>Retail education</option><option>Product introduction</option><option>Vendor announcement</option><option>Event awareness</option></select></div>
               <div class="field"><label for="campaignMessage">Core message</label><textarea id="campaignMessage">A clearer way to understand terpene profiles, built for curious Maryland adults.</textarea></div>
+            </div>
+
+            <div class="control-section asset-section">
+              <h2>Bring your own asset</h2>
+              <label class="asset-drop" for="assetUpload">
+                <input id="assetUpload" type="file" accept=".png,.jpg,.jpeg,.webp,.pdf,image/*,application/pdf">
+                <span class="asset-drop-mark" aria-hidden="true">+</span>
+                <span><strong>Upload PNG, image, or PDF</strong><small id="assetStatus" role="status" aria-live="polite">Choose a file to add it to this draft. Files stay in this local prototype.</small></span>
+              </label>
             </div>
 
             <div class="control-section">
               <h2>Audience and market</h2>
-              <div class="fields">
-                <div class="field"><label for="campaignAudience">Audience</label><select id="campaignAudience"><option>Adults 21+</option><option>Verified retailers</option><option>Industry professionals</option></select></div>
-                <div class="field"><label for="campaignMarket">Market</label><select id="campaignMarket"><option>Maryland</option><option>New Jersey</option><option>Massachusetts</option></select></div>
-              </div>
+              <fieldset class="audience-picker">
+                <legend>Approved audiences</legend>
+                <label><input type="checkbox" name="campaignAudience" value="Adults 21+" checked><span>Adults 21+</span></label>
+                <label><input type="checkbox" name="campaignAudience" value="Verified retailers"><span>Verified retailers</span></label>
+                <label><input type="checkbox" name="campaignAudience" value="Industry professionals"><span>Industry professionals</span></label>
+              </fieldset>
+              <div class="field"><label for="campaignMarket">Market</label><select id="campaignMarket"><option>Maryland</option><option>New Jersey</option><option>Massachusetts</option><option>Nationwide legal states</option></select></div>
               <div class="field"><label for="campaignFormat">Format</label><select id="campaignFormat"><option value="square">Square social · 1:1</option><option value="portrait">Portrait story · 4:5</option><option value="wide">Landscape · 16:9</option></select></div>
+              <label class="protection-toggle"><input id="sensitiveContent" type="checkbox"><span><strong>Contains wholesale pricing or protected business details</strong><small>Public audiences will be removed and the post will require verified business access.</small></span></label>
             </div>
 
             <div class="control-section">
@@ -69,6 +82,8 @@
               <span class="canvas-mark">BRI<span>DGE</span></span>
               <div class="canvas-copy"><h2 id="canvasHeadline">Know what shapes the experience.</h2><p id="canvasBody">A straightforward guide to terpene profiles, created for curious adults and responsible conversations.</p></div>
               <span class="canvas-chip">Learn responsibly</span>
+              <span class="canvas-access" id="canvasAccess" aria-live="polite">Adults 21+ · Public promotion</span>
+              <span class="canvas-asset" id="canvasAsset" hidden>Uploaded asset attached</span>
             </div>
           </section>
 
@@ -100,12 +115,12 @@
 
         <nav class="route-handoff" aria-label="Continue through Bridge">
           <a class="route-handoff-home" href="/"><span>Bridge overview</span><strong>See the full connected platform</strong></a>
-          <a class="route-handoff-next" href="/business"><span>Continue to Business</span><strong>Connect the campaign to a verified operator.</strong><small>Review the business profile, license state, roles, and qualified market context.</small></a>
+          <a class="route-handoff-next" href="/business"><span>Continue to My Profile</span><strong>Connect the campaign to a verified operator.</strong><small>Review the business profile, contact status, permissions, and qualified market context.</small></a>
         </nav>
       </div>
     </main>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"><strong></strong><span></span></div>
-  <script src="/app.js"></script>
+  <script src="/app-v2.js"></script>
 </body>
 </html>

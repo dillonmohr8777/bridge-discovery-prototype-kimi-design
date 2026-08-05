@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id="news" viewBox="0 0 24 24">
+    <path d="M5 4.75h14v14.5H5zM8 8h8M8 11.5h8M8 15h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="create" viewBox="0 0 24 24">
+    <path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="profile" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="3.25" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5.75 19c.55-3.3 2.63-5.1 6.25-5.1s5.7 1.8 6.25 5.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="explore" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="7.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="m14.85 9.15-1.7 4-4 1.7 1.7-4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="home" viewBox="0 0 24 24">
+    <path d="m4.75 11.1 7.25-6 7.25 6v8.15H7.2V12h9.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+</svg>

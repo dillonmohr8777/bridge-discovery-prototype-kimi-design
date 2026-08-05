@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="noindex, nofollow">
-  <title>Bridge Business OS | Verified Profiles + Insights</title>
+  <title>Bridge My Profile | Verified Identity + Access</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body data-page="business">
@@ -12,12 +12,12 @@
   <div class="app-shell">
     <aside class="sidebar">
       <a aria-label='Bridge prototype suite' class='brand' href='/'><img src="/assets/bridge-mark.svg" alt=""><span class="logo-word">BRIDGE</span></a>
-      <nav class="primary-nav" aria-label="Prototype suite">
-        <a href='/community'><span class="nav-icon">⌂</span><span>Community</span></a>
-        <a href='/studio'><span class="nav-icon">✦</span><span>Create</span></a>
-        <a class='active' href='/business' aria-current="page"><span class="nav-icon">▦</span><span>Business</span></a>
-        <a href='/signal'><span class="nav-icon">⌁</span><span>Exchange</span></a>
-        <a href='/'><span class="nav-icon">↗</span><span>Overview</span></a>
+      <nav class="primary-nav" aria-label="Bridge navigation">
+        <a href='/community'><svg class="nav-icon" aria-hidden="true"><use href="/assets/nav-icons.svg#news"></use></svg><span>Community News</span></a>
+        <a href='/studio'><svg class="nav-icon" aria-hidden="true"><use href="/assets/nav-icons.svg#create"></use></svg><span>Create</span></a>
+        <a class='active' href='/business' aria-current="page"><svg class="nav-icon" aria-hidden="true"><use href="/assets/nav-icons.svg#profile"></use></svg><span>My Profile</span></a>
+        <a href='/signal'><svg class="nav-icon" aria-hidden="true"><use href="/assets/nav-icons.svg#explore"></use></svg><span>Explore</span></a>
+        <a href='/'><svg class="nav-icon" aria-hidden="true"><use href="/assets/nav-icons.svg#home"></use></svg><span>Home</span></a>
       </nav>
       <div class="sidebar-footer"><div class="sidebar-status"><strong>Verification workspace</strong><span>License, authority, contact, and renewal state in one record</span></div></div>
     </aside>
@@ -25,7 +25,7 @@
     <main class="app-main" id="main">
       <header class="topbar">
         <a class='mobile-brand' href='/' aria-label='Bridge home'><img src="/assets/bridge-mark.svg" alt=""><span class="logo-word">BRIDGE</span></a>
-        <label class="searchbox"><span aria-hidden="true">⌕</span><input id="directorySearch" type="search" placeholder="Search verified directory" aria-label="Search verified directory"></label>
+        <label class="searchbox"><span aria-hidden="true">⌕</span><input type="search" placeholder="Search Bridge" aria-label="Search Bridge"></label>
         <div class="top-actions">
           <button class="button secondary small" type="button" id="exportInsights">Export CSV</button>
           <button class="icon-button" type="button" data-toast="Admin queue|Four applications need review and one renewal is due.">⚑</button>
@@ -35,15 +35,29 @@
 
       <div class="page">
         <header class="page-head">
-          <div><p class="eyebrow">Business OS</p><h1>Trust, discovery, and insight in one operating view.</h1><p>A combined profile, verification, roles, and market-intelligence experience for licensed businesses.</p></div>
-          <div class="tabs" aria-label="Profile view"><button class="tab active" type="button" data-profile-view="b2b">B2B view</button><button class="tab" type="button" data-profile-view="public">Public view</button></div>
+          <div><p class="eyebrow">My Profile</p><h1>Your verified home base.</h1><p>Manage public identity, business-only details, responsible contacts, verification, and team access from one place.</p></div>
+          <div class="tabs" aria-label="Profile view"><button class="tab active" type="button" data-profile-view="b2b" aria-pressed="true">B2B view</button><button class="tab" type="button" data-profile-view="public" aria-pressed="false">Public view</button></div>
         </header>
+
+        <section class="contact-review" aria-labelledby="contact-review-title" aria-live="polite">
+          <div>
+            <span class="status-dot" aria-hidden="true"></span>
+            <div><strong id="contact-review-title">First-login contact check</strong><p>Confirm the people responsible for sales and accounting. Bridge will request a fresh confirmation every 90 days.</p></div>
+          </div>
+          <div class="contact-review-meta"><span>Last confirmed Jun 18, 2026</span><span>Next reminder Sep 16, 2026</span></div>
+          <div class="contact-review-actions"><button class="button secondary small" type="button" data-contact-update>Update contacts</button><button class="button primary small" type="button" data-contact-confirm>Confirm current</button></div>
+        </section>
 
         <section class="business-hero" aria-label="Business profile and verification">
           <article class="panel profile-hero" id="profileHero">
             <div class="profile-lockup"><span class="avatar">HB</span><div><span class="badge verified">✓ Verified business</span><p style="margin:6px 0 0">License MD-PRC-02841 · Renewed Jun 2026</p></div></div>
             <h2>Harbor Botanicals</h2>
             <p id="profileDescription">Maryland processor creating dependable education tools and retail-ready product programs. Open to verified retailer, testing, and field-sales relationships.</p>
+            <div class="profile-contact-grid" data-profile-private>
+              <div><span>Sales representative</span><strong>Amara Lee</strong><small>Confirmed Jun 18</small></div>
+              <div><span>Accounting contact</span><strong>Jordan Kim</strong><small>Confirmed Jun 18</small></div>
+            </div>
+            <div class="access-summary" data-profile-private><span class="badge verified">EIN evidence confirmed</span><small>The EIN and uploaded documents are never displayed on a profile.</small></div>
             <div class="profile-actions"><button class="button primary" type="button" data-toast="Introduction started|Bridge will confirm mutual fit before contact details are shared.">Request introduction</button><button class="button ghost" type="button" data-toggle-action="Following Harbor Botanicals|Unfollowed Harbor Botanicals">Follow</button></div>
           </article>
 
@@ -84,11 +98,11 @@
             </section>
 
             <section class="panel panel-body">
-              <div class="section-head"><div><p class="eyebrow">Admin queue</p><h2>Access + roles</h2></div><button class="button secondary small" type="button" data-toast="Invite prepared|An admin invite can assign a scoped role after identity verification.">Invite</button></div>
+              <div class="section-head"><div><p class="eyebrow">Admin queue</p><h2>Contacts + access</h2></div><button class="button secondary small" type="button" data-toast="Invite prepared|An admin invite can assign a scoped role after identity verification.">Invite</button></div>
               <table class="role-table">
                 <caption class="sr-only">People with access to the Harbor Botanicals business profile</caption>
                 <thead><tr><th>Person</th><th>Role</th><th>Status</th></tr></thead>
-                <tbody><tr><td>Jordan Kim</td><td>Business admin</td><td><span class="badge verified">Active</span></td></tr><tr><td>Amara Lee</td><td>Sales rep</td><td><span class="badge verified">Active</span></td></tr><tr><td>Devon Reed</td><td>Analyst</td><td><span class="badge pending">Invited</span></td></tr></tbody>
+                <tbody><tr><td>Jordan Kim</td><td>Accounting contact</td><td><span class="badge verified">Confirmed</span></td></tr><tr><td>Amara Lee</td><td>Sales representative</td><td><span class="badge verified">Confirmed</span></td></tr><tr><td>Devon Reed</td><td>Analyst</td><td><span class="badge pending">Invited</span></td></tr></tbody>
               </table>
             </section>
           </aside>
@@ -105,12 +119,12 @@
 
         <nav class="route-handoff" aria-label="Continue through Bridge">
           <a class="route-handoff-home" href="/"><span>Bridge overview</span><strong>See the full connected platform</strong></a>
-          <a class="route-handoff-next" href="/signal"><span>Continue to Exchange</span><strong>See where verified market movement is happening.</strong><small>Explore the live 3D city map and permissioned opportunity matches.</small></a>
+          <a class="route-handoff-next" href="/signal"><span>Continue to Explore</span><strong>Find verified markets, products, and services.</strong><small>Use nationwide filters, favorites, market context, and permissioned opportunity matches.</small></a>
         </nav>
       </div>
     </main>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"><strong></strong><span></span></div>
-  <script src="/app.js"></script>
+  <script src="/app-v2.js"></script>
 </body>
 </html>

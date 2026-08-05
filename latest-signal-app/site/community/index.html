@@ -15,12 +15,12 @@
         <img src="/assets/bridge-mark.svg" alt="">
         <span class="logo-word">BRIDGE</span>
       </a>
-      <nav class="primary-nav" aria-label="Prototype suite">
-        <a class='active' href='/community' aria-current="page"><span class="nav-icon">⌂</span><span>Community</span></a>
-        <a href='/studio'><span class="nav-icon">✦</span><span>Create</span></a>
-        <a href='/business'><span class="nav-icon">▦</span><span>Business</span></a>
-        <a href='/signal'><span class="nav-icon">⌁</span><span>Exchange</span></a>
-        <a href='/'><span class="nav-icon">↗</span><span>Overview</span></a>
+      <nav class="primary-nav" aria-label="Bridge navigation">
+        <a class='active' href='/community' aria-current="page"><svg class="nav-icon" aria-hidden="true"><use href="/assets/nav-icons.svg#news"></use></svg><span>Community News</span></a>
+        <a href='/studio'><svg class="nav-icon" aria-hidden="true"><use href="/assets/nav-icons.svg#create"></use></svg><span>Create</span></a>
+        <a href='/business'><svg class="nav-icon" aria-hidden="true"><use href="/assets/nav-icons.svg#profile"></use></svg><span>My Profile</span></a>
+        <a href='/signal'><svg class="nav-icon" aria-hidden="true"><use href="/assets/nav-icons.svg#explore"></use></svg><span>Explore</span></a>
+        <a href='/'><svg class="nav-icon" aria-hidden="true"><use href="/assets/nav-icons.svg#home"></use></svg><span>Home</span></a>
       </nav>
       <div class="sidebar-footer">
         <div class="sidebar-status"><strong>Maryland · Adult use</strong><span>Location-aware experience · Sample data</span></div>
@@ -30,7 +30,7 @@
     <main class="app-main" id="main">
       <header class="topbar">
         <a class='mobile-brand' href='/' aria-label='Bridge home'><img src="/assets/bridge-mark.svg" alt=""><span class="logo-word">BRIDGE</span></a>
-        <label class="searchbox"><span aria-hidden="true">⌕</span><input type="search" placeholder="Search businesses, people, or topics" aria-label="Search Bridge"></label>
+        <label class="searchbox"><span aria-hidden="true">⌕</span><input type="search" placeholder="Search Bridge" aria-label="Search Bridge"></label>
         <div class="top-actions">
           <button class="icon-button" type="button" data-toast="No unread alerts|Verification renewal is due in 23 days." aria-label="Notifications">◌</button>
           <button class="icon-button" type="button" data-toast="Messages opened|Three active conversations." aria-label="Messages">✉</button>
@@ -43,9 +43,9 @@
       <div class="page">
         <header class="page-head">
           <div>
-            <p class="eyebrow">Community</p>
-            <h1>The signal starts with the community.</h1>
-            <p>A connected feed built for discovery and participation, without likes, follower counts, or public vote history.</p>
+            <p class="eyebrow">Community News</p>
+            <h1>Your industry, in one useful view.</h1>
+            <p>Scan visual stories, business updates, events, promotions, and private daily signals without public popularity counts.</p>
           </div>
           <button class="button primary" type="button" data-toast="Composer opened|A production build would open a text, photo, or link post composer.">Create a post</button>
         </header>
@@ -77,24 +77,30 @@
               </div>
             </article>
 
-            <div class="section-head">
-              <div><p class="eyebrow">Your network</p><h2>Useful updates, not a popularity contest.</h2></div>
-              <div class="filter-row" aria-label="Feed filters">
-                <button class="filter active" type="button" data-filter>For you</button>
-                <button class="filter" type="button" data-filter>Following</button>
-                <button class="filter" type="button" data-filter>Nearby</button>
+            <div class="section-head feed-section-head">
+              <div><p class="eyebrow">Your network</p><h2>Choose how you want to scan the news.</h2></div>
+              <div class="feed-toolbar">
+                <div class="filter-row" aria-label="Feed filters">
+                  <button class="filter active" type="button" data-filter>For you</button>
+                  <button class="filter" type="button" data-filter>Following</button>
+                  <button class="filter" type="button" data-filter>Nearby</button>
+                </div>
+                <div class="view-switcher" aria-label="Feed layout">
+                  <button class="filter active" type="button" data-feed-layout="newspaper" aria-pressed="true">News grid</button>
+                  <button class="filter" type="button" data-feed-layout="vertical" aria-pressed="false">Classic feed</button>
+                </div>
               </div>
             </div>
 
-            <div class="feed">
-              <article class="panel post" data-feed-item>
+            <div class="feed feed-newspaper" data-feed-grid data-layout="newspaper">
+              <article class="panel post post-featured" data-feed-item>
                 <div class="post-head">
                   <span class="avatar rose">HB</span>
                   <div><strong>Harbor Botanicals</strong><small>Verified brand · Baltimore, MD · 18m</small></div>
                   <span class="badge verified">✓ Verified</span>
                 </div>
                 <p class="post-copy">Retail partners asked for simpler education materials. We listened. Our new terpene guide is available to every verified Maryland account.</p>
-                <div class="post-media purple">
+                <div class="post-media photo-night">
                   <div class="post-media-copy"><span>Harbor Field Guide 01</span><h3>Know what shapes the experience.</h3></div>
                 </div>
                 <div class="post-actions">
@@ -116,6 +122,46 @@
                   <button class="action-button" type="button" data-toggle-action="Reposted|Removed repost">↻ <span>Repost</span></button>
                   <button class="action-button" type="button" data-toggle-action="Saved|Removed from saves">⌑ <span>Save</span></button>
                   <button class="action-button" type="button" data-toast="Introduction request started|Bridge will confirm fit and permission before sharing contact details.">⇄ <span>Request intro</span></button>
+                </div>
+              </article>
+
+              <article class="panel post" data-feed-item>
+                <div class="post-head">
+                  <span class="avatar alt">NF</span>
+                  <div><strong>North Fork Labs</strong><small>Verified testing laboratory · Maryland · 2h</small></div>
+                  <span class="badge verified">✓ Verified</span>
+                </div>
+                <p class="post-copy">Sample intake is open for verified Maryland operators. Save the new turnaround guide or request a private introduction to our laboratory team.</p>
+                <div class="post-media market-map"><div class="post-media-copy"><span>Industry service</span><h3>Testing capacity, clearly mapped.</h3></div></div>
+                <div class="post-actions">
+                  <button class="action-button" type="button" data-toggle-action="Saved|Removed from saves">⌑ <span>Save</span></button>
+                  <button class="action-button" type="button" data-toast="Introduction request started|Bridge will confirm verification and permission before sharing contact details.">⇄ <span>Request intro</span></button>
+                </div>
+              </article>
+
+              <article class="panel post post-promotion" data-feed-item>
+                <div class="post-head">
+                  <span class="avatar green">CG</span>
+                  <div><strong>Common Ground Dispensary</strong><small>Promotion · Adults 21+ · Columbia, MD · 3h</small></div>
+                  <span class="badge">Promotion</span>
+                </div>
+                <p class="post-copy">This weekend’s education table pairs verified local brands with clear product information for adults 21 and older.</p>
+                <div class="post-actions">
+                  <button class="action-button" type="button" data-toggle-action="Saved|Removed from saves">⌑ <span>Save</span></button>
+                  <button class="action-button" type="button" data-toast="Directions ready|The consumer profile can open directions without exposing business-only fields.">↗ <span>Directions</span></button>
+                </div>
+              </article>
+
+              <article class="panel post post-compact" data-feed-item>
+                <div class="post-head">
+                  <span class="avatar rose">MI</span>
+                  <div><strong>Maryland Industry Week</strong><small>Verified event · Baltimore, MD · Today</small></div>
+                  <span class="badge verified">✓ Verified</span>
+                </div>
+                <p class="post-copy">Applications are open for brands, retailers, service providers, and educators who want to participate in the summer network showcase.</p>
+                <div class="post-actions">
+                  <button class="action-button" type="button" data-toggle-action="Saved|Removed from saves">⌑ <span>Save</span></button>
+                  <button class="action-button" type="button" data-toast="Event details opened|Eligibility and application details are ready for review.">↗ <span>View event</span></button>
                 </div>
               </article>
             </div>
@@ -157,13 +203,13 @@
         </div>
 
         <nav class="route-handoff" aria-label="Continue through Bridge">
-          <a class="route-handoff-home" href="/"><span>Bridge overview</span><strong>See the full connected platform</strong></a>
+          <a class="route-handoff-home" href="/"><span>Bridge home</span><strong>See the full connected platform</strong></a>
           <a class="route-handoff-next" href="/studio"><span>Continue to Create</span><strong>Turn a useful signal into compliant creative.</strong><small>Build a campaign with audience, market, and review context already attached.</small></a>
         </nav>
       </div>
     </main>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"><strong></strong><span></span></div>
-  <script src="/app.js"></script>
+  <script src="/app-v2.js"></script>
 </body>
 </html>

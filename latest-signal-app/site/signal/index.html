@@ -4,21 +4,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="noindex, nofollow">
-  <title>Bridge Signal Exchange | Recommended Strategic Concept</title>
+  <title>Bridge Explore | Nationwide Industry Discovery</title>
   <link rel="preload" as="image" href="/assets/bridge-midatlantic-3d-v1.webp" type="image/webp">
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body class="signal-page" data-page="signal">
-  <a class="skip-link" href="#main">Skip to Signal Exchange</a>
+  <a class="skip-link" href="#main">Skip to Explore</a>
   <div class="app-shell">
     <aside class="sidebar">
       <a aria-label='Bridge prototype suite' class='brand' href='/'><img src="/assets/bridge-mark.svg" alt=""><span class="logo-word">BRIDGE</span></a>
-      <nav class="primary-nav" aria-label="Prototype suite">
-        <a href='/community'><span class="nav-icon">⌂</span><span>Community</span></a>
-        <a href='/studio'><span class="nav-icon">✦</span><span>Create</span></a>
-        <a href='/business'><span class="nav-icon">▦</span><span>Business</span></a>
-        <a class='active' href='/signal' aria-current="page"><span class="nav-icon">⌁</span><span>Exchange</span></a>
-        <a href='/'><span class="nav-icon">↗</span><span>Overview</span></a>
+      <nav class="primary-nav" aria-label="Bridge navigation">
+        <a href='/community'><svg class="nav-icon" aria-hidden="true"><use href="/assets/nav-icons.svg#news"></use></svg><span>Community News</span></a>
+        <a href='/studio'><svg class="nav-icon" aria-hidden="true"><use href="/assets/nav-icons.svg#create"></use></svg><span>Create</span></a>
+        <a href='/business'><svg class="nav-icon" aria-hidden="true"><use href="/assets/nav-icons.svg#profile"></use></svg><span>My Profile</span></a>
+        <a class='active' href='/signal' aria-current="page"><svg class="nav-icon" aria-hidden="true"><use href="/assets/nav-icons.svg#explore"></use></svg><span>Explore</span></a>
+        <a href='/'><svg class="nav-icon" aria-hidden="true"><use href="/assets/nav-icons.svg#home"></use></svg><span>Home</span></a>
       </nav>
       <div class="sidebar-footer"><div class="sidebar-status"><strong>Recommended expansion</strong><span>Market pulse → opportunity match → permissioned introduction</span></div></div>
     </aside>
@@ -26,9 +26,9 @@
     <main class="app-main" id="main">
       <header class="topbar">
         <a class='mobile-brand' href='/' aria-label='Bridge home'><img src="/assets/bridge-mark.svg" alt=""><span class="logo-word">BRIDGE</span></a>
-        <label class="searchbox"><span aria-hidden="true">⌕</span><input type="search" placeholder="Search opportunities, markets, or signals" aria-label="Search Signal Exchange"></label>
+        <label class="searchbox"><span aria-hidden="true">⌕</span><input type="search" placeholder="Search Bridge" aria-label="Search Bridge"></label>
         <div class="top-actions">
-          <span class="badge dark">Strategic concept</span>
+          <span class="badge dark">Nationwide concept</span>
           <button class="button primary small" type="button" data-toast="Signal builder opened|Verified businesses can propose a market question for Bridge review.">Ask the network</button>
           <button class="avatar-button" type="button" data-toast="Pro intelligence|Harbor Botanicals has access to aggregated cohorts and opportunity matching."><span class="avatar rose">HB</span><span><strong>Harbor Botanicals</strong><small>Intelligence Pro</small></span></button>
         </div>
@@ -36,9 +36,32 @@
 
       <div class="page">
         <header class="page-head">
-          <div><p class="eyebrow">Signal Exchange concept</p><h1>See the market move. Meet the right people next.</h1><p>Signal Exchange turns privacy-conscious community intelligence into qualified opportunities for verified businesses.</p></div>
+          <div><p class="eyebrow">Explore</p><h1>Find what matters across the legal industry.</h1><p>Search nationwide by state, product, brand, strain, business type, and service, then save the parts of the network you want to follow.</p></div>
           <button class="button ghost" type="button" data-toast="Prototype methodology|Future signals require a named source, qualified cohort, geography, threshold, and collection window.">View methodology</button>
         </header>
+
+        <section class="explore-discovery" aria-labelledby="explore-results-title">
+          <div class="explore-controls">
+            <label class="explore-search"><span>Search</span><input id="exploreSearch" data-local-search type="search" placeholder="Brand, product, strain, or service"></label>
+            <label><span>State</span><select id="exploreState"><option value="all">All legal states</option><option value="md">Maryland</option><option value="nj">New Jersey</option><option value="ma">Massachusetts</option><option value="va">Virginia</option></select></label>
+            <label><span>Category</span><select id="exploreCategory"><option value="all">All categories</option><option value="dispensary">Dispensaries</option><option value="brand">Brands</option><option value="lab">Testing labs</option><option value="service">Industry services</option></select></label>
+            <label><span>Product</span><select id="exploreProduct"><option value="all">All products</option><option value="preroll">Pre-rolls</option><option value="edible">Edibles</option><option value="concentrate">Concentrates</option><option value="service">Services</option></select></label>
+            <button class="button ghost" type="button" id="exploreFavorites" aria-pressed="false">Favorites only</button>
+          </div>
+          <div class="explore-results-head"><div><h2 id="explore-results-title">Recommended across the network</h2><p id="exploreResultCount" aria-live="polite">6 results · Illustrative prototype records</p></div><span class="badge dark">Nationwide filters</span></div>
+          <div class="explore-results" id="exploreResults">
+            <article class="explore-card featured" data-explore="common ground dispensary retailer menu order directions leafly edibles concentrates" data-state="md" data-category="dispensary" data-product="edible concentrate" data-favorite="true">
+              <div class="explore-card-media dispensary"><span>Consumer utility</span></div>
+              <div class="explore-card-body"><div class="explore-card-head"><span class="badge verified">✓ Verified dispensary</span><button class="favorite-button active" type="button" data-favorite-button aria-pressed="true" aria-label="Remove Common Ground Dispensary from favorites">Saved</button></div><h3>Common Ground Dispensary</h3><p>Columbia, Maryland · Live menu, ordering, directions, and public profiles in one place.</p><div class="utility-links"><button type="button" data-toast="Live menu opened|This prototype would open the dispensary’s current public menu.">Live menu</button><button type="button" data-toast="Order handoff opened|Bridge would hand off to the dispensary’s approved ordering provider.">Order link</button><a href="https://maps.apple.com/?q=cannabis+dispensary+Columbia+Maryland" target="_blank" rel="noopener noreferrer">Apple Maps</a><button type="button" data-toast="Public profiles opened|Instagram, Facebook, LinkedIn, and Leafly links remain public-profile utilities.">Social + Leafly</button></div></div>
+            </article>
+            <article class="explore-card" data-explore="harbor botanicals brand processor pre-roll education" data-state="md" data-category="brand" data-product="preroll" data-favorite="false"><div class="explore-card-media brand"><span>Brand</span></div><div class="explore-card-body"><div class="explore-card-head"><span class="badge verified">✓ Verified brand</span><button class="favorite-button" type="button" data-favorite-button aria-pressed="false" aria-label="Add Harbor Botanicals to favorites">Save</button></div><h3>Harbor Botanicals</h3><p>Maryland processor · Pre-roll education · Open to verified retailers.</p><button class="button ghost small" type="button" data-intro="Harbor Botanicals">Request introduction</button></div></article>
+            <article class="explore-card" data-explore="north fork labs testing laboratory compliance" data-state="md" data-category="lab" data-product="service" data-favorite="false"><div class="explore-card-media lab"><span>Testing</span></div><div class="explore-card-body"><div class="explore-card-head"><span class="badge verified">✓ Verified lab</span><button class="favorite-button" type="button" data-favorite-button aria-pressed="false" aria-label="Add North Fork Labs to favorites">Save</button></div><h3>North Fork Labs</h3><p>Baltimore, Maryland · Testing capacity and compliance support.</p><button class="button ghost small" type="button" data-intro="North Fork Labs">Request introduction</button></div></article>
+            <article class="explore-card" data-explore="greenline transport logistics delivery" data-state="nj" data-category="service" data-product="service" data-favorite="true"><div class="explore-card-media transport"><span>Transport</span></div><div class="explore-card-body"><div class="explore-card-head"><span class="badge verified">✓ Credentials checked</span><button class="favorite-button active" type="button" data-favorite-button aria-pressed="true" aria-label="Remove Greenline Transport from favorites">Saved</button></div><h3>Greenline Transport</h3><p>New Jersey · Licensed logistics for verified operators.</p><button class="button ghost small" type="button" data-intro="Greenline Transport">Request introduction</button></div></article>
+            <article class="explore-card" data-explore="cannabis build partners construction hvac electrical" data-state="ma" data-category="service" data-product="service" data-favorite="false"><div class="explore-card-media build"><span>Construction</span></div><div class="explore-card-body"><div class="explore-card-head"><span class="badge verified">✓ References checked</span><button class="favorite-button" type="button" data-favorite-button aria-pressed="false" aria-label="Add Cannabis Build Partners to favorites">Save</button></div><h3>Cannabis Build Partners</h3><p>Massachusetts · Construction, HVAC, and electrical specialists.</p><button class="button ghost small" type="button" data-intro="Cannabis Build Partners">Request introduction</button></div></article>
+            <article class="explore-card" data-explore="industry first bank financial banking compliance" data-state="va" data-category="service" data-product="service" data-favorite="false"><div class="explore-card-media bank"><span>Banking</span></div><div class="explore-card-body"><div class="explore-card-head"><span class="badge verified">✓ Credentials checked</span><button class="favorite-button" type="button" data-favorite-button aria-pressed="false" aria-label="Add Industry First Bank to favorites">Save</button></div><h3>Industry First Bank</h3><p>Virginia · Banking support for qualified industry businesses.</p><button class="button ghost small" type="button" data-intro="Industry First Bank">Request introduction</button></div></article>
+          </div>
+          <div class="explore-empty" id="exploreEmpty" hidden><strong>No matches yet.</strong><span>Clear a filter or broaden the search to see more of the nationwide network.</span></div>
+        </section>
 
         <section class="exchange-grid" aria-label="Regional pulse and opportunity matches">
           <div class="pulse-map-shell">
@@ -61,7 +84,7 @@
           </div>
 
           <aside class="opportunity-list" aria-label="Matched opportunities">
-            <div class="section-head"><div><p class="eyebrow">Illustrative matches</p><h2>Example qualified openings</h2></div><span class="badge dark">Concept data</span></div>
+            <div class="section-head"><div><p class="eyebrow">Signal intelligence</p><h2>Example verified opportunities</h2></div><span class="badge dark">Concept data</span></div>
 
             <article class="opportunity">
               <div class="opportunity-top"><span class="badge verified">✓ Verified retailer</span><span class="badge dark">Example fit</span></div>
@@ -106,13 +129,13 @@
         </section>
 
         <nav class="route-handoff" aria-label="Continue through Bridge">
-          <a class="route-handoff-home" href="/"><span>Bridge overview</span><strong>See the full connected platform</strong></a>
-          <a class="route-handoff-next" href="/community"><span>Return to Community</span><strong>Bring market learning back to the people behind it.</strong><small>Participate in the next private signal and reconnect with the network.</small></a>
+          <a class="route-handoff-home" href="/"><span>Bridge home</span><strong>See the full connected platform</strong></a>
+          <a class="route-handoff-next" href="/community"><span>Return to Community News</span><strong>Bring discovery back to the people behind it.</strong><small>Participate in the next private signal and reconnect with the network.</small></a>
         </nav>
       </div>
     </main>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"><strong></strong><span></span></div>
-  <script src="/app.js"></script>
+  <script src="/app-v2.js"></script>
 </body>
 </html>

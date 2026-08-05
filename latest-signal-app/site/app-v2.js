@@ -20,8 +20,7 @@
     || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
   document.documentElement.classList.toggle("perf-lite", Boolean(prefersReducedMotion || prefersLiteMotion));
 
-  // Global quick switcher. Existing topbar search fields become a consistent
-  // entry point without changing route names or the information architecture.
+  // Global quick switcher. The labels follow Tori's approved Phase 2 map.
   function initCommandPalette() {
     const palette = document.createElement("div");
     palette.className = "command-palette";
@@ -45,25 +44,25 @@
         <div class="command-results" id="commandResults">
           <p class="command-group-label">Spaces</p>
           <div class="command-grid">
-            <a class="command-item" href="/community" data-command-search="community people feed daily signal">
-              <span class="command-mark">C</span><span><strong>Community</strong><small>People, posts, and private daily signals</small></span><b aria-hidden="true">01</b>
+            <a class="command-item" href="/community" data-command-search="community news people feed daily signal">
+              <span class="command-mark">N</span><span><strong>Community News</strong><small>People, visual stories, and private daily signals</small></span><b aria-hidden="true">01</b>
             </a>
             <a class="command-item" href="/studio" data-command-search="create studio campaign creative compliance">
-              <span class="command-mark">S</span><span><strong>Campaign Studio</strong><small>Create and review compliant campaigns</small></span><b aria-hidden="true">02</b>
+              <span class="command-mark">C</span><span><strong>Create</strong><small>Upload, target, and review compliant campaigns</small></span><b aria-hidden="true">02</b>
             </a>
-            <a class="command-item" href="/business" data-command-search="business verified directory profile operations">
-              <span class="command-mark">B</span><span><strong>Business OS</strong><small>Verify, discover, and manage growth</small></span><b aria-hidden="true">03</b>
+            <a class="command-item" href="/business" data-command-search="my profile business verified contacts identity permissions">
+              <span class="command-mark">P</span><span><strong>My Profile</strong><small>Manage identity, contacts, verification, and access</small></span><b aria-hidden="true">03</b>
             </a>
-            <a class="command-item" href="/signal" data-command-search="exchange signal map market city opportunities google maps">
-              <span class="command-mark">X</span><span><strong>Signal Exchange</strong><small>Explore markets, maps, and matches</small></span><b aria-hidden="true">04</b>
+            <a class="command-item" href="/signal" data-command-search="explore nationwide signal map market product brand strain service favorites">
+              <span class="command-mark">E</span><span><strong>Explore</strong><small>Search markets, products, brands, and services</small></span><b aria-hidden="true">04</b>
             </a>
           </div>
           <p class="command-group-label">Quick actions</p>
           <div class="command-actions">
-            <a href="/community" data-command-search="ask network create post community">Ask the network</a>
+            <a href="/community" data-command-search="community news post daily signal">Open Community News</a>
             <a href="/studio" data-command-search="new campaign generate creative">Create a campaign</a>
-            <a href="/business" data-command-search="find verified business directory">Find a verified business</a>
-            <a href="/signal" data-command-search="explore regional signal city map">Explore regional signals</a>
+            <a href="/business" data-command-search="profile contacts verification access">Review profile contacts</a>
+            <a href="/signal" data-command-search="explore nationwide regional signal city map">Explore the nationwide network</a>
           </div>
           <p class="command-empty" hidden>No matching Bridge space. Try a broader search.</p>
         </div>
@@ -115,7 +114,7 @@
     palette.querySelectorAll("a").forEach((link) => link.addEventListener("click", closePalette));
     input.addEventListener("input", filterCommands);
 
-    document.querySelectorAll(".searchbox input").forEach((search) => {
+    document.querySelectorAll(".searchbox input:not([data-local-search])").forEach((search) => {
       search.setAttribute("readonly", "");
       search.setAttribute("aria-haspopup", "dialog");
       search.setAttribute("aria-controls", "commandPalette");
@@ -170,7 +169,7 @@
   function initViewportReveals() {
     if (prefersReducedMotion || !("IntersectionObserver" in window)) return;
     const targets = Array.from(document.querySelectorAll(
-      ".page-head > *, .panel, .suite-card, .signal-visual, .route-handoff, .dark-panel, .opportunity"
+      ".page-head > *, .panel, .suite-card, .signal-visual, .visual-story-card, .contact-review, .explore-card, .route-handoff, .dark-panel, .opportunity"
     ));
     if (!targets.length) return;
     document.documentElement.classList.add("motion-ready");
@@ -238,6 +237,23 @@
     });
   });
 
+  // Tori asked to compare a staggered digital-newspaper feed with a simpler
+  // vertical pattern. The same content switches between both treatments.
+  const feedGrid = document.querySelector("[data-feed-grid]");
+  document.querySelectorAll("[data-feed-layout]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const layout = button.dataset.feedLayout;
+      if (!feedGrid || !layout) return;
+      feedGrid.dataset.layout = layout;
+      document.querySelectorAll("[data-feed-layout]").forEach((item) => {
+        const selected = item === button;
+        item.classList.toggle("active", selected);
+        item.setAttribute("aria-pressed", String(selected));
+      });
+      showToast(layout === "newspaper" ? "News grid selected" : "Classic feed selected", layout === "newspaper" ? "A visual, staggered scan of the network." : "A focused, single-column reading path.");
+    });
+  });
+
   // Landing age gate. This matches the stated 30-day retention instead of session-only storage.
   const ageGate = document.getElementById("ageGate");
   if (ageGate) {
@@ -301,6 +317,68 @@
   const canvasHeadline = document.getElementById("canvasHeadline");
   const canvasBody = document.getElementById("canvasBody");
   const canvasKicker = document.getElementById("canvasKicker");
+  const canvasAccess = document.getElementById("canvasAccess");
+  const canvasAsset = document.getElementById("canvasAsset");
+  const assetUpload = document.getElementById("assetUpload");
+  const assetStatus = document.getElementById("assetStatus");
+  const sensitiveContent = document.getElementById("sensitiveContent");
+  const audienceInputs = Array.from(document.querySelectorAll('input[name="campaignAudience"]'));
+
+  function updateAudienceAccess() {
+    const selected = audienceInputs.filter((input) => input.checked).map((input) => input.value);
+    const protectedPost = Boolean(sensitiveContent?.checked);
+    if (canvasAccess) {
+      canvasAccess.textContent = selected.length
+        ? `${selected.join(" + ")} · ${protectedPost ? "Verified access only" : "Public promotion"}`
+        : "Choose at least one audience";
+      canvasAccess.classList.toggle("protected", protectedPost);
+    }
+    const publish = document.getElementById("publishButton");
+    if (publish) publish.disabled = selected.length === 0;
+  }
+
+  audienceInputs.forEach((input) => input.addEventListener("change", updateAudienceAccess));
+  sensitiveContent?.addEventListener("change", () => {
+    const publicAudience = audienceInputs.find((input) => input.value === "Adults 21+");
+    if (sensitiveContent.checked) {
+      if (publicAudience) {
+        publicAudience.checked = false;
+        publicAudience.disabled = true;
+      }
+      const businessAudiences = audienceInputs.filter((input) => input !== publicAudience);
+      if (!businessAudiences.some((input) => input.checked)) businessAudiences.forEach((input) => { input.checked = true; });
+      showToast("Protected business content", "Public access was removed. Only verified retailers and industry professionals can receive this post.");
+    } else if (publicAudience) {
+      publicAudience.disabled = false;
+    }
+    updateAudienceAccess();
+  });
+
+  assetUpload?.addEventListener("change", () => {
+    const file = assetUpload.files?.[0];
+    if (!file || !assetStatus) return;
+    const allowed = /\.(png|jpe?g|webp|pdf)$/i.test(file.name);
+    const withinLimit = file.size <= 25 * 1024 * 1024;
+    if (!allowed || !withinLimit) {
+      assetUpload.value = "";
+      assetStatus.textContent = !allowed ? "Use a PNG, JPG, WEBP, or PDF file." : "Choose a file smaller than 25 MB.";
+      if (canvasAsset) canvasAsset.hidden = true;
+      showToast("Asset not added", assetStatus.textContent);
+      return;
+    }
+    assetStatus.textContent = `${file.name} · ${(file.size / 1024 / 1024).toFixed(1)} MB · Ready for preview`;
+    if (canvasAsset) {
+      canvasAsset.hidden = false;
+      canvasAsset.textContent = file.name;
+    }
+    showToast("Asset attached", "The file remains local in this prototype and will travel with the draft's audience and review context.");
+  });
+
+  document.getElementById("campaignType")?.addEventListener("change", (event) => {
+    if (canvasKicker) canvasKicker.textContent = `${event.target.value} · ${document.getElementById("campaignMarket")?.value || "Selected market"}`;
+  });
+
+  updateAudienceAccess();
 
   function selectVariant(variant) {
     document.querySelectorAll("[data-variant]").forEach((item) => item.classList.toggle("active", item === variant));
@@ -403,7 +481,11 @@
   // Business profile view and insight controls.
   document.querySelectorAll("[data-profile-view]").forEach((tab) => {
     tab.addEventListener("click", () => {
-      document.querySelectorAll("[data-profile-view]").forEach((item) => item.classList.toggle("active", item === tab));
+      document.querySelectorAll("[data-profile-view]").forEach((item) => {
+        const active = item === tab;
+        item.classList.toggle("active", active);
+        item.setAttribute("aria-pressed", String(active));
+      });
       const publicView = tab.dataset.profileView === "public";
       const description = document.getElementById("profileDescription");
       if (description) {
@@ -411,8 +493,25 @@
           ? "Maryland processor focused on practical education and responsible adult-use conversations. Follow for public product and community updates."
           : "Maryland processor creating dependable education tools and retail-ready product programs. Open to verified retailer, testing, and field-sales relationships.";
       }
+      document.querySelectorAll("[data-profile-private]").forEach((element) => { element.hidden = publicView; });
       showToast(publicView ? "Public profile" : "B2B profile", publicView ? "Private commercial fields are now hidden." : "Verified partnership and buying fields are now visible.");
     });
+  });
+
+  document.querySelector("[data-contact-confirm]")?.addEventListener("click", (event) => {
+    const review = event.currentTarget.closest(".contact-review");
+    review?.classList.add("confirmed");
+    const title = review?.querySelector("strong");
+    const description = review?.querySelector("p");
+    if (title) title.textContent = "Contacts confirmed for this cycle";
+    if (description) description.textContent = "Sales and accounting responsibilities are current. Bridge will request confirmation again in 90 days.";
+    event.currentTarget.disabled = true;
+    event.currentTarget.textContent = "Confirmed";
+    showToast("Contacts confirmed", "The profile audit history now reflects this prototype confirmation.");
+  });
+
+  document.querySelector("[data-contact-update]")?.addEventListener("click", () => {
+    showToast("Contact editor opened", "A production build would verify the new responsible person before changing protected profile access.");
   });
 
   const chartSets = {
@@ -439,6 +538,63 @@
       row.hidden = Boolean(query) && !row.dataset.directory.includes(query);
     });
   });
+
+  // Nationwide Explore filters and favorites.
+  const exploreCards = Array.from(document.querySelectorAll("[data-explore]"));
+  const exploreSearch = document.getElementById("exploreSearch");
+  const exploreState = document.getElementById("exploreState");
+  const exploreCategory = document.getElementById("exploreCategory");
+  const exploreProduct = document.getElementById("exploreProduct");
+  const exploreFavorites = document.getElementById("exploreFavorites");
+  const exploreResultCount = document.getElementById("exploreResultCount");
+  const exploreEmpty = document.getElementById("exploreEmpty");
+
+  function applyExploreFilters() {
+    if (!exploreCards.length) return;
+    const query = exploreSearch?.value.trim().toLowerCase() || "";
+    const state = exploreState?.value || "all";
+    const category = exploreCategory?.value || "all";
+    const product = exploreProduct?.value || "all";
+    const favoritesOnly = exploreFavorites?.getAttribute("aria-pressed") === "true";
+    let visible = 0;
+    exploreCards.forEach((card) => {
+      const matches = (!query || card.dataset.explore.includes(query))
+        && (state === "all" || card.dataset.state === state)
+        && (category === "all" || card.dataset.category === category)
+        && (product === "all" || card.dataset.product.split(" ").includes(product))
+        && (!favoritesOnly || card.dataset.favorite === "true");
+      card.hidden = !matches;
+      if (matches) visible += 1;
+    });
+    if (exploreResultCount) exploreResultCount.textContent = `${visible} ${visible === 1 ? "result" : "results"} · Illustrative prototype records`;
+    if (exploreEmpty) exploreEmpty.hidden = visible !== 0;
+  }
+
+  [exploreSearch, exploreState, exploreCategory, exploreProduct].forEach((control) => {
+    control?.addEventListener(control.tagName === "INPUT" ? "input" : "change", applyExploreFilters);
+  });
+  exploreFavorites?.addEventListener("click", () => {
+    const active = exploreFavorites.getAttribute("aria-pressed") !== "true";
+    exploreFavorites.setAttribute("aria-pressed", String(active));
+    exploreFavorites.classList.toggle("primary", active);
+    applyExploreFilters();
+  });
+  document.querySelectorAll("[data-favorite-button]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const card = button.closest("[data-explore]");
+      if (!card) return;
+      const saved = card.dataset.favorite !== "true";
+      card.dataset.favorite = String(saved);
+      button.classList.toggle("active", saved);
+      button.setAttribute("aria-pressed", String(saved));
+      button.textContent = saved ? "Saved" : "Save";
+      button.setAttribute("aria-label", `${saved ? "Remove" : "Add"} ${card.querySelector("h3")?.textContent || "profile"} ${saved ? "from" : "to"} favorites`);
+      applyExploreFilters();
+      showToast(saved ? "Saved to favorites" : "Removed from favorites", "Your Explore view now reflects this preference.");
+    });
+  });
+
+  applyExploreFilters();
 
   document.getElementById("exportInsights")?.addEventListener("click", () => {
     const csv = "cohort,recommendation,information,price,values,sample\nMaryland adults 21+,38,31,19,12,1284\n";

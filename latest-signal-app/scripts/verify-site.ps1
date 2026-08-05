@@ -66,6 +66,8 @@ $phaseTwoChecks = @{
   'Create protected audience rule' = @{ Path = 'studio\index.html'; Pattern = 'id="sensitiveContent"' }
   'Profile contact confirmation' = @{ Path = 'business\index.html'; Pattern = 'class="contact-review"' }
   'Explore nationwide filters' = @{ Path = 'signal\index.html'; Pattern = 'id="exploreState"' }
+  'Explore full state coverage' = @{ Path = 'signal\index.html'; Pattern = 'All 50 states and D\.C\. are available to search' }
+  'Explore District of Columbia option' = @{ Path = 'signal\index.html'; Pattern = '<option value="dc">District of Columbia</option>' }
   'Explore favorites' = @{ Path = 'signal\index.html'; Pattern = 'id="exploreFavorites"' }
 }
 

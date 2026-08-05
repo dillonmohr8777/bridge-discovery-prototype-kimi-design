@@ -25,7 +25,7 @@
 | Separate public/member from EIN-verified business access | Added Public and B2B modes plus a field-level visibility contract | My Profile, product contract | Prototyped; final policy approval needed |
 | Decide vendor-to-vendor visibility | Deny-by-default recommendation documented | Product contract decision record | Decision needed |
 | Expand directory beyond cannabis brands | Added illustrative bank, transport, lab, construction/HVAC/electrical, dispensary, and brand records | Explore | Implemented in prototype |
-| Support nationwide legal-state discovery | Added nationwide framing and state/location/category/product/service search controls | Explore | Implemented with illustrative fixtures |
+| Support nationwide state discovery | Added all 50 states and D.C. to the state selector; kept the current Maryland, Massachusetts, New Jersey, and Virginia records explicitly labeled as illustrative coverage | Explore | Nationwide filter implemented; live data coverage pending |
 | Add filters for state, product, brands, strains, and categories | Added composable search plus State, Category, and Product controls; search covers brand/strain/service terms | Explore | Implemented in prototype |
 | Add favorites | Added record save state and Favorites only filtering | Explore | Implemented |
 | Consumer dispensary profile should expose menu/order/maps/social/Leafly | Added a Common Ground consumer-utility example | Explore | Prototyped; provider decisions pending |

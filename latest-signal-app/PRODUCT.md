@@ -31,7 +31,7 @@ Core positioning: **One industry. One network. One Bridge.**
 2. Public, member, and verified-business information are visually and behaviorally distinct.
 3. A creator can upload PNG, JPEG, WebP, or PDF content and choose more than one eligible audience.
 4. Protected business material cannot be targeted to a public audience.
-5. A member can search and filter illustrative nationwide records, favorite them, and request permissioned introductions.
+5. A member can search all 50 states and D.C., distinguish full geographic filter coverage from the four-state illustrative record set, favorite records, and request permissioned introductions.
 6. A business owner sees current sales and accounting contacts and understands the recurring confirmation requirement.
 7. The feed comparison lets stakeholders decide between a staggered news grid and a classic vertical feed using the same content.
 8. Responsive layouts work without horizontal overflow at desktop and 390-pixel mobile widths.

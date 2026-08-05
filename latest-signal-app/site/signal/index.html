@@ -43,12 +43,66 @@
         <section class="explore-discovery" aria-labelledby="explore-results-title">
           <div class="explore-controls">
             <label class="explore-search"><span>Search</span><input id="exploreSearch" data-local-search type="search" placeholder="Brand, product, strain, or service"></label>
-            <label><span>State</span><select id="exploreState"><option value="all">All legal states</option><option value="md">Maryland</option><option value="nj">New Jersey</option><option value="ma">Massachusetts</option><option value="va">Virginia</option></select></label>
+            <label><span>State</span><select id="exploreState">
+              <option value="all">All U.S. states + D.C.</option>
+              <option value="al">Alabama</option>
+              <option value="ak">Alaska</option>
+              <option value="az">Arizona</option>
+              <option value="ar">Arkansas</option>
+              <option value="ca">California</option>
+              <option value="co">Colorado</option>
+              <option value="ct">Connecticut</option>
+              <option value="de">Delaware</option>
+              <option value="dc">District of Columbia</option>
+              <option value="fl">Florida</option>
+              <option value="ga">Georgia</option>
+              <option value="hi">Hawaii</option>
+              <option value="id">Idaho</option>
+              <option value="il">Illinois</option>
+              <option value="in">Indiana</option>
+              <option value="ia">Iowa</option>
+              <option value="ks">Kansas</option>
+              <option value="ky">Kentucky</option>
+              <option value="la">Louisiana</option>
+              <option value="me">Maine</option>
+              <option value="md">Maryland</option>
+              <option value="ma">Massachusetts</option>
+              <option value="mi">Michigan</option>
+              <option value="mn">Minnesota</option>
+              <option value="ms">Mississippi</option>
+              <option value="mo">Missouri</option>
+              <option value="mt">Montana</option>
+              <option value="ne">Nebraska</option>
+              <option value="nv">Nevada</option>
+              <option value="nh">New Hampshire</option>
+              <option value="nj">New Jersey</option>
+              <option value="nm">New Mexico</option>
+              <option value="ny">New York</option>
+              <option value="nc">North Carolina</option>
+              <option value="nd">North Dakota</option>
+              <option value="oh">Ohio</option>
+              <option value="ok">Oklahoma</option>
+              <option value="or">Oregon</option>
+              <option value="pa">Pennsylvania</option>
+              <option value="ri">Rhode Island</option>
+              <option value="sc">South Carolina</option>
+              <option value="sd">South Dakota</option>
+              <option value="tn">Tennessee</option>
+              <option value="tx">Texas</option>
+              <option value="ut">Utah</option>
+              <option value="vt">Vermont</option>
+              <option value="va">Virginia</option>
+              <option value="wa">Washington</option>
+              <option value="wv">West Virginia</option>
+              <option value="wi">Wisconsin</option>
+              <option value="wy">Wyoming</option>
+            </select></label>
             <label><span>Category</span><select id="exploreCategory"><option value="all">All categories</option><option value="dispensary">Dispensaries</option><option value="brand">Brands</option><option value="lab">Testing labs</option><option value="service">Industry services</option></select></label>
             <label><span>Product</span><select id="exploreProduct"><option value="all">All products</option><option value="preroll">Pre-rolls</option><option value="edible">Edibles</option><option value="concentrate">Concentrates</option><option value="service">Services</option></select></label>
             <button class="button ghost" type="button" id="exploreFavorites" aria-pressed="false">Favorites only</button>
           </div>
-          <div class="explore-results-head"><div><h2 id="explore-results-title">Recommended across the network</h2><p id="exploreResultCount" aria-live="polite">6 results · Illustrative prototype records</p></div><span class="badge dark">Nationwide filters</span></div>
+          <p class="explore-coverage-note">All 50 states and D.C. are available to search. The illustrative records below currently span four states.</p>
+          <div class="explore-results-head"><div><h2 id="explore-results-title">Recommended across the network</h2><p id="exploreResultCount" aria-live="polite">6 sample records · 4 states represented</p></div><span class="badge dark">Nationwide filters</span></div>
           <div class="explore-results" id="exploreResults">
             <article class="explore-card featured" data-explore="common ground dispensary retailer menu order directions leafly edibles concentrates" data-state="md" data-category="dispensary" data-product="edible concentrate" data-favorite="true">
               <div class="explore-card-media dispensary"><span>Consumer utility</span></div>
@@ -60,7 +114,7 @@
             <article class="explore-card" data-explore="cannabis build partners construction hvac electrical" data-state="ma" data-category="service" data-product="service" data-favorite="false"><div class="explore-card-media build"><span>Construction</span></div><div class="explore-card-body"><div class="explore-card-head"><span class="badge verified">✓ References checked</span><button class="favorite-button" type="button" data-favorite-button aria-pressed="false" aria-label="Add Cannabis Build Partners to favorites">Save</button></div><h3>Cannabis Build Partners</h3><p>Massachusetts · Construction, HVAC, and electrical specialists.</p><button class="button ghost small" type="button" data-intro="Cannabis Build Partners">Request introduction</button></div></article>
             <article class="explore-card" data-explore="industry first bank financial banking compliance" data-state="va" data-category="service" data-product="service" data-favorite="false"><div class="explore-card-media bank"><span>Banking</span></div><div class="explore-card-body"><div class="explore-card-head"><span class="badge verified">✓ Credentials checked</span><button class="favorite-button" type="button" data-favorite-button aria-pressed="false" aria-label="Add Industry First Bank to favorites">Save</button></div><h3>Industry First Bank</h3><p>Virginia · Banking support for qualified industry businesses.</p><button class="button ghost small" type="button" data-intro="Industry First Bank">Request introduction</button></div></article>
           </div>
-          <div class="explore-empty" id="exploreEmpty" hidden><strong>No matches yet.</strong><span>Clear a filter or broaden the search to see more of the nationwide network.</span></div>
+          <div class="explore-empty" id="exploreEmpty" hidden><strong id="exploreEmptyTitle">No sample records match.</strong><span id="exploreEmptyCopy">Clear a filter or broaden the search to see more of the prototype network.</span></div>
         </section>
 
         <section class="exchange-grid" aria-label="Regional pulse and opportunity matches">

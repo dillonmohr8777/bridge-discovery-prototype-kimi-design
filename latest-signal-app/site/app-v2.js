@@ -548,11 +548,14 @@
   const exploreFavorites = document.getElementById("exploreFavorites");
   const exploreResultCount = document.getElementById("exploreResultCount");
   const exploreEmpty = document.getElementById("exploreEmpty");
+  const exploreEmptyTitle = document.getElementById("exploreEmptyTitle");
+  const exploreEmptyCopy = document.getElementById("exploreEmptyCopy");
 
   function applyExploreFilters() {
     if (!exploreCards.length) return;
     const query = exploreSearch?.value.trim().toLowerCase() || "";
     const state = exploreState?.value || "all";
+    const stateLabel = exploreState?.selectedOptions?.[0]?.textContent || "the selected state";
     const category = exploreCategory?.value || "all";
     const product = exploreProduct?.value || "all";
     const favoritesOnly = exploreFavorites?.getAttribute("aria-pressed") === "true";
@@ -566,7 +569,22 @@
       card.hidden = !matches;
       if (matches) visible += 1;
     });
-    if (exploreResultCount) exploreResultCount.textContent = `${visible} ${visible === 1 ? "result" : "results"} · Illustrative prototype records`;
+    const recordLabel = visible === 1 ? "sample record" : "sample records";
+    const hasAdditionalFilters = Boolean(query || category !== "all" || product !== "all" || favoritesOnly);
+    if (exploreResultCount) {
+      if (state !== "all") exploreResultCount.textContent = `${visible} ${recordLabel} · ${stateLabel}`;
+      else if (hasAdditionalFilters) exploreResultCount.textContent = `${visible} ${recordLabel} · Nationwide filter`;
+      else exploreResultCount.textContent = `${visible} ${recordLabel} · 4 states represented`;
+    }
+    if (visible === 0 && exploreEmptyTitle && exploreEmptyCopy) {
+      if (state !== "all") {
+        exploreEmptyTitle.textContent = `No sample records for ${stateLabel} yet.`;
+        exploreEmptyCopy.textContent = "The nationwide state selector is complete. This prototype currently includes illustrative records in Maryland, Massachusetts, New Jersey, and Virginia. Choose another state or clear the filter.";
+      } else {
+        exploreEmptyTitle.textContent = "No sample records match these filters.";
+        exploreEmptyCopy.textContent = "Clear a filter or broaden the search to see more of the prototype network.";
+      }
+    }
     if (exploreEmpty) exploreEmpty.hidden = visible !== 0;
   }
 

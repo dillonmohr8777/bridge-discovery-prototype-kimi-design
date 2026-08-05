@@ -1944,6 +1944,7 @@ body:not(.landing):not(.signal-page) .app-main {
 .explore-controls select option { color: var(--graphite); background: white; }
 .explore-controls .button { min-height: 46px; }
 .explore-controls .button[aria-pressed="true"] { border-color: #b983ff; background: var(--purple); }
+.explore-coverage-note { max-width: 72ch; margin: 14px 0 0; color: rgba(255,255,255,.68); font-size: 12px; line-height: 1.55; }
 .explore-results-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; margin: 28px 0 14px; }
 .explore-results-head h2 { margin: 0; color: white; font: 800 clamp(23px,2.4vw,32px)/1.1 var(--font-display); letter-spacing: -.025em; }
 .explore-results-head p { margin: 4px 0 0; color: rgba(255,255,255,.58); font-size: 12px; }

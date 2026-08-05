@@ -105,7 +105,7 @@ This matrix is the Phase 2 implementation baseline. “Decision” means the vis
 3. They save useful records and can isolate favorites.
 4. They request an introduction or use eligible public consumer utilities.
 
-**Acceptance:** Search and filters update the result count; empty results are explained; favorites expose saved state; protected contact exchange is represented as a request, not automatic disclosure.
+**Acceptance:** The state selector includes all 50 states and D.C.; search and filters update the result count; no-result states distinguish complete geographic coverage from the four-state illustrative record set; favorites expose saved state; protected contact exchange is represented as a request, not automatic disclosure.
 
 ## 4. Backend and integration contract for Miraj
 
@@ -150,7 +150,7 @@ This matrix is the Phase 2 implementation baseline. “Decision” means the vis
 | Vendor-to-vendor protected visibility | Deny by default; grant by explicit organization role and relationship | Tori + Miraj + legal | Unresolved |
 | Exact public/member/business field set | Use the matrix above as working baseline | Tori + Miraj | Field-level approval needed |
 | Phase 2 vertical slice | Create targeted promotion plus protected profile projection | Dillon + Miraj | Select before build |
-| Nationwide data coverage | Start with curated legal-state fixtures, then choose authoritative providers | Miraj + product | Technical discovery needed |
+| Nationwide data coverage | Expose all 50 states and D.C. as the geographic filter; keep the current four-state fixtures explicitly labeled until authoritative providers and market-eligibility rules are chosen | Miraj + product | Technical discovery needed |
 | Subscription pricing | Keep $349-$350 discussion out of product UI until packaging research is complete | Dillon + business | Not final |
 | HR concept | Separate future discovery with employment/privacy counsel | Dillon + legal | Outside Phase 2 MVP |
 

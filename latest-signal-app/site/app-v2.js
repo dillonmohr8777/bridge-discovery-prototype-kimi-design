@@ -612,6 +612,7 @@
   const signalMapMount = document.getElementById("signalLiveMap");
   const signalMapPanel = signalMapMount?.closest(".pulse-map");
   const signalMapStatus = document.getElementById("signalMapStatus");
+  const signalLiveMapEnabled = signalMapMount?.dataset.liveMap === "enabled";
   let signal3DMap = null;
   let signalMapAttempted = false;
 
@@ -698,7 +699,9 @@
   }
 
   if (signalMapMount) {
-    if ("IntersectionObserver" in window) {
+    if (!signalLiveMapEnabled) {
+      setSignalMapFallback("Illustrative regional fallback");
+    } else if ("IntersectionObserver" in window) {
       const mapObserver = new IntersectionObserver((entries, observer) => {
         if (entries.some((entry) => entry.isIntersecting)) {
           observer.disconnect();

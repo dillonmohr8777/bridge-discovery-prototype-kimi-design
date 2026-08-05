@@ -17,6 +17,10 @@ $required = @(
   'assets\bridge-mark.svg',
   'assets\nav-icons.svg',
   'assets\bridge-midatlantic-3d-v1.webp',
+  'assets\bridge-state-maryland-3d-v1.webp',
+  'assets\bridge-state-new-jersey-3d-v1.webp',
+  'assets\bridge-state-massachusetts-3d-v1.webp',
+  'assets\bridge-state-virginia-3d-v1.webp',
   'assets\fonts\inter-latin.woff2',
   'assets\fonts\montserrat-latin.woff2',
   'assets\fonts\poppins-600-latin.woff2',
@@ -68,6 +72,8 @@ $phaseTwoChecks = @{
   'Explore nationwide filters' = @{ Path = 'signal\index.html'; Pattern = 'id="exploreState"' }
   'Explore full state coverage' = @{ Path = 'signal\index.html'; Pattern = 'All 50 states and D\.C\. are available to search' }
   'Explore District of Columbia option' = @{ Path = 'signal\index.html'; Pattern = '<option value="dc">District of Columbia</option>' }
+  'Explore multi-state 3D map theater' = @{ Path = 'signal\index.html'; Pattern = 'id="signalMapRender"' }
+  'Explore state map synchronization' = @{ Path = 'signal\index.html'; Pattern = 'data-state="ma" data-market="Boston, MA' }
   'Explore favorites' = @{ Path = 'signal\index.html'; Pattern = 'id="exploreFavorites"' }
 }
 

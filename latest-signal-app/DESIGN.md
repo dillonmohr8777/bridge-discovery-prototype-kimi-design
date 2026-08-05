@@ -39,7 +39,7 @@ Bridge should feel like a trusted industry operating layer: dark, editorial, ene
 - Daily Signal prompt.
 - Asset upload, audience selector, protected-content notice, and live creative preview.
 - First-login contact confirmation card and public/B2B profile modes.
-- Explore filters, result cards, favorites, consumer utility links, and permissioned introduction actions.
+- Explore filters, result cards, favorites, a synchronized five-view illustrative 3D map theater, consumer utility links, and permissioned introduction actions.
 - Opportunity, methodology, and signal-ledger cards for deeper discovery.
 
 ## Quality floor

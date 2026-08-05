@@ -812,11 +812,12 @@ p { text-wrap: pretty; }
 .signal-page .eyebrow { color: #ba82ff; }
 .exchange-grid { display: grid; grid-template-columns: minmax(0,1.25fr) minmax(340px,.75fr); gap: 20px; }
 .pulse-map-shell { display: grid; min-width: 0; align-content: start; gap: 12px; }
-.pulse-map { position: relative; min-height: 540px; overflow: hidden; isolation: isolate; border: 1px solid #302a36; border-radius: 24px; background: #08060b; }
-.pulse-map::before { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(180deg, rgba(7,5,11,.92) 0, rgba(7,5,11,.5) 24%, transparent 48%, rgba(7,5,11,.28) 100%); pointer-events: none; }
+.pulse-map { position: relative; min-height: 600px; overflow: hidden; isolation: isolate; border: 1px solid #302a36; border-radius: 24px; background: #08060b; }
+.pulse-map::before { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(180deg, rgba(7,5,11,.94) 0, rgba(7,5,11,.5) 24%, transparent 52%, rgba(7,5,11,.82) 100%); pointer-events: none; }
 .pulse-live-map { position: absolute; z-index: 0; inset: 0; opacity: 0; background: #08060b; pointer-events: none; transition: opacity .45s ease; }
 .pulse-live-map gmp-map-3d { display: block; width: 100%; height: 100%; }
-.pulse-map-render { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: .9; transition: opacity .45s ease; }
+.pulse-map-render { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center; opacity: .94; transform: scale(1); filter: saturate(1); transition: opacity .34s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1), filter .34s ease; }
+.pulse-map-render.is-changing { opacity: .24; transform: scale(1.018); filter: saturate(.55) blur(3px); }
 .pulse-map.is-live .pulse-live-map { opacity: 1; pointer-events: auto; }
 .pulse-map.is-live .pulse-map-render { opacity: 0; pointer-events: none; }
 .pulse-title {
@@ -835,22 +836,17 @@ p { text-wrap: pretty; }
 }
 .pulse-title h2 { margin: 0; font: 700 24px/1.18 var(--font-display); letter-spacing: -.02em; }
 .pulse-title .muted { max-width: 430px; margin-top: 9px; color: rgba(255,255,255,.75); font-size: 14px; line-height: 1.5; }
-.market-node-layer { position: absolute; z-index: 4; inset: 0; pointer-events: none; }
-.market-node { position: absolute; z-index: 4; display: inline-flex; min-height: 44px; align-items: center; gap: 8px; padding: 7px 10px 7px 8px; border: 1px solid rgba(255,255,255,.2); border-radius: 14px; background: rgba(10,7,13,.83); color: white; box-shadow: 0 12px 30px rgba(0,0,0,.34); text-align: left; transform: translate(-50%,-50%); backdrop-filter: blur(12px); }
+.market-node-layer { position: absolute; z-index: 4; right: 16px; bottom: 16px; left: 16px; display: flex; gap: 8px; overflow-x: auto; overscroll-behavior-inline: contain; padding: 3px; scroll-snap-type: x proximity; scrollbar-width: none; pointer-events: none; }
+.market-node-layer::-webkit-scrollbar { display: none; }
+.market-node { position: relative; z-index: 4; display: inline-flex; min-height: 48px; flex: 0 0 auto; align-items: center; gap: 8px; padding: 7px 11px 7px 9px; border: 1px solid rgba(255,255,255,.2); border-radius: 14px; background: rgba(10,7,13,.88); color: white; box-shadow: 0 12px 30px rgba(0,0,0,.34); text-align: left; scroll-snap-align: start; backdrop-filter: blur(12px); }
 .market-node-layer .market-node { pointer-events: auto; }
 .market-node::before { content: ""; width: 13px; height: 13px; flex: 0 0 auto; border: 4px solid white; border-radius: 50%; background: var(--violet); box-shadow: 0 0 0 7px rgba(124,58,237,.18); }
 .market-node strong { display: block; color: white; font: 700 11px/1.25 var(--font-subhead); }
 .market-node small { display: block; margin-top: 3px; color: #e1caff; font-size: 10px; line-height: 1.25; }
 .market-node:hover, .market-node.active { border-color: #b983ff; background: rgba(75,0,130,.88); box-shadow: 0 0 0 4px rgba(124,58,237,.14), 0 16px 34px rgba(0,0,0,.4); }
-.market-node.richmond { left: 22%; bottom: 4%; }
-.market-node.baltimore { left: 39%; bottom: 28%; }
-.market-node.newark { left: 64%; top: 34%; }
-.market-node.boston { right: 4%; top: 15%; }
-.map-model-note { position: absolute; z-index: 3; right: 16px; bottom: 14px; padding: 8px 10px; border: 1px solid rgba(255,255,255,.16); border-radius: 999px; background: rgba(7,5,11,.8); color: rgba(255,255,255,.78); font: 600 10px/1.2 var(--font-subhead); letter-spacing: .045em; text-transform: uppercase; backdrop-filter: blur(10px); }
-.pulse-map.is-live .market-node-layer { inset: auto 14px 14px; display: flex; gap: 8px; max-width: calc(100% - 28px); overflow-x: auto; overscroll-behavior-inline: contain; padding: 2px; scroll-snap-type: x proximity; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-.pulse-map.is-live .market-node-layer::-webkit-scrollbar { display: none; }
-.pulse-map.is-live .market-node { position: relative; inset: auto; flex: 0 0 auto; transform: none; scroll-snap-align: start; }
-.pulse-map.is-live .map-model-note { top: 16px; right: 16px; bottom: auto; color: #e2ceff; }
+.market-node:focus-visible { outline: 2px solid white; outline-offset: 3px; }
+.map-model-note { position: absolute; z-index: 3; right: 18px; bottom: 82px; max-width: 220px; padding: 8px 10px; border: 1px solid rgba(255,255,255,.16); border-radius: 999px; background: rgba(7,5,11,.8); color: rgba(255,255,255,.78); font: 600 10px/1.2 var(--font-subhead); letter-spacing: .045em; text-align: center; text-transform: uppercase; backdrop-filter: blur(10px); }
+.pulse-map.is-live .map-model-note { color: #e2ceff; }
 .signal-city-detail { display: flex; min-width: 0; align-items: center; justify-content: space-between; gap: 18px; padding: 19px 20px; border: 1px solid #302a36; border-radius: 18px; background: linear-gradient(135deg, #151019, #0d0a10); }
 .signal-city-detail h3 { margin: 0; font: 700 21px/1.2 var(--font-display); letter-spacing: -.018em; }
 .signal-city-detail p:not(.eyebrow) { margin: 7px 0 5px; color: rgba(255,255,255,.78); font-size: 14px; line-height: 1.5; }
@@ -1105,27 +1101,13 @@ p { text-wrap: pretty; }
   .suite-card, .suite-card:nth-child(n) { grid-column: auto; min-height: 0; padding: 23px; }
   .suite-card .number { margin-bottom: 42px; }
   .exchange-lower { grid-template-columns: 1fr; }
-  .pulse-map { min-height: 500px; }
-  .pulse-map-render { object-fit: contain; object-position: center bottom; opacity: .94; }
+  .pulse-map { min-height: 560px; }
+  .pulse-map-render { object-fit: contain; object-position: center; opacity: .96; }
   .pulse-title { left: 14px; top: 14px; right: 14px; max-width: none; padding: 16px 17px; border-radius: 15px; }
   .pulse-title h2 { max-width: 300px; font-size: 22px; line-height: 1.2; }
   .pulse-title .muted { max-width: 290px; font-size: 13px; line-height: 1.5; }
-  .market-node-layer {
-    inset: 210px 12px auto;
-    display: flex;
-    gap: 7px;
-    max-width: calc(100% - 24px);
-    overflow-x: auto;
-    overscroll-behavior-inline: contain;
-    padding: 3px;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-  .market-node-layer::-webkit-scrollbar { display: none; }
-  .pulse-map.is-live .market-node-layer { inset: 210px 12px auto; }
+  .market-node-layer { right: 12px; bottom: 12px; left: 12px; gap: 7px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
   .market-node { min-height: 42px; gap: 6px; padding: 6px 8px 6px 7px; }
-  .market-node-layer .market-node { position: relative; inset: auto; flex: 0 0 auto; transform: none; scroll-snap-align: start; }
   .market-node::before { width: 11px; height: 11px; border-width: 3px; box-shadow: 0 0 0 6px rgba(124,58,237,.18); }
   .map-model-note { display: none; }
   .signal-city-detail { align-items: stretch; flex-direction: column; }

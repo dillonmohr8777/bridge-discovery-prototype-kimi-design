@@ -105,7 +105,7 @@ This matrix is the Phase 2 implementation baseline. “Decision” means the vis
 3. They save useful records and can isolate favorites.
 4. They request an introduction or use eligible public consumer utilities.
 
-**Acceptance:** The state selector includes all 50 states and D.C.; search and filters update the result count; no-result states distinguish complete geographic coverage from the four-state illustrative record set; favorites expose saved state; protected contact exchange is represented as a request, not automatic disclosure.
+**Acceptance:** The state selector includes all 50 states and D.C.; search and filters update the result count; no-result states distinguish complete geographic coverage from the four-state illustrative record set; the corridor overview and four state-specific 3D scenes stay synchronized with supported state filters and remain labeled as illustrative; favorites expose saved state; protected contact exchange is represented as a request, not automatic disclosure.
 
 ## 4. Backend and integration contract for Miraj
 

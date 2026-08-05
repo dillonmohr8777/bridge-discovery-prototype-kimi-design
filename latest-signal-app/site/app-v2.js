@@ -629,15 +629,54 @@
   const marketNodes = Array.from(document.querySelectorAll("[data-market]"));
   const signalMapMount = document.getElementById("signalLiveMap");
   const signalMapPanel = signalMapMount?.closest(".pulse-map");
+  const signalMapRender = document.getElementById("signalMapRender");
   const signalMapStatus = document.getElementById("signalMapStatus");
   const signalLiveMapEnabled = signalMapMount?.dataset.liveMap === "enabled";
   let signal3DMap = null;
   let signalMapAttempted = false;
+  let signalMapRenderRequest = 0;
+  const signalMapRenderCache = new Map();
 
   function setSignalMapFallback(message) {
     signalMapPanel?.classList.remove("is-live");
     signalMapMount?.setAttribute("aria-hidden", "true");
-    if (signalMapStatus) signalMapStatus.textContent = message || "Illustrative regional fallback";
+    if (signalMapStatus) signalMapStatus.textContent = message || "5 illustrative 3D views";
+  }
+
+  function preloadSignalMapRender(url) {
+    if (!url || signalMapRenderCache.has(url)) return signalMapRenderCache.get(url);
+    const image = new Image();
+    image.src = url;
+    signalMapRenderCache.set(url, image);
+    return image;
+  }
+
+  function updateSignalMapRender(node) {
+    const render = node.dataset.render;
+    if (!signalMapRender || !render || signalMapPanel?.classList.contains("is-live")) return;
+    signalMapPanel.dataset.mapScope = node.dataset.state || "all";
+    const currentPath = new URL(signalMapRender.src, window.location.href).pathname;
+    if (currentPath === render) {
+      signalMapRender.alt = node.dataset.renderAlt || signalMapRender.alt;
+      if (signalMapStatus) signalMapStatus.textContent = `5 illustrative 3D views · ${node.dataset.renderLabel || "Selected view"}`;
+      return;
+    }
+
+    const request = ++signalMapRenderRequest;
+    const nextRender = preloadSignalMapRender(render);
+    signalMapRender.classList.add("is-changing");
+    if (signalMapStatus) signalMapStatus.textContent = `Loading ${node.dataset.renderLabel || "3D view"}`;
+
+    const applyRender = () => {
+      if (request !== signalMapRenderRequest) return;
+      signalMapRender.src = render;
+      signalMapRender.alt = node.dataset.renderAlt || "Illustrative 3D state map render";
+      window.requestAnimationFrame(() => signalMapRender.classList.remove("is-changing"));
+      if (signalMapStatus) signalMapStatus.textContent = `5 illustrative 3D views · ${node.dataset.renderLabel || "Selected view"}`;
+    };
+
+    if (nextRender?.complete) applyRender();
+    else nextRender?.addEventListener("load", applyRender, { once: true });
   }
 
   function focusSignalMap(node) {
@@ -689,6 +728,7 @@
         });
 
         marketNodes.forEach((node) => {
+          if (node.dataset.state === "all") return;
           const lat = Number(node.dataset.lat);
           const lng = Number(node.dataset.lng);
           if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
@@ -718,7 +758,7 @@
 
   if (signalMapMount) {
     if (!signalLiveMapEnabled) {
-      setSignalMapFallback("Illustrative regional fallback");
+      setSignalMapFallback("5 illustrative 3D views");
     } else if ("IntersectionObserver" in window) {
       const mapObserver = new IntersectionObserver((entries, observer) => {
         if (entries.some((entry) => entry.isIntersecting)) {
@@ -732,30 +772,51 @@
     }
   }
 
-  marketNodes.forEach((node) => {
-    node.addEventListener("click", () => {
-      const [market, signal, sample] = node.dataset.market.split("|");
-      marketNodes.forEach((item) => {
-        item.classList.toggle("active", item === node);
-        item.setAttribute("aria-pressed", String(item === node));
-      });
-      const marketName = document.getElementById("selectedMarketName");
-      const marketSignal = document.getElementById("selectedMarketSignal");
-      const marketSample = document.getElementById("selectedMarketSample");
-      const googleMap = document.getElementById("signalGoogleMap");
-      if (marketName) marketName.textContent = market;
-      if (marketSignal) marketSignal.textContent = signal;
-      if (marketSample) marketSample.textContent = sample;
-      if (googleMap) {
-        const city = market.split(",")[0];
-        googleMap.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(node.dataset.mapQuery)}`;
-        const label = document.getElementById("signalGoogleMapLabel");
-        if (label) label.textContent = `Open ${city} in Google Maps`;
-        else googleMap.textContent = `Open ${city} in Google Maps`;
-      }
-      focusSignalMap(node);
-      showToast(market, `${signal} · ${sample}`);
+  function activateMarketNode(node, { syncExplore = false, announce = false } = {}) {
+    if (!node) return;
+    const [market, signal, sample] = node.dataset.market.split("|");
+    marketNodes.forEach((item) => {
+      item.classList.toggle("active", item === node);
+      item.setAttribute("aria-pressed", String(item === node));
     });
+    const nodeLayer = node.parentElement;
+    if (nodeLayer && nodeLayer.scrollWidth > nodeLayer.clientWidth) {
+      const targetLeft = node.offsetLeft - ((nodeLayer.clientWidth - node.offsetWidth) / 2);
+      nodeLayer.scrollTo({ left: targetLeft, behavior: prefersReducedMotion ? "auto" : "smooth" });
+    }
+
+    const marketName = document.getElementById("selectedMarketName");
+    const marketSignal = document.getElementById("selectedMarketSignal");
+    const marketSample = document.getElementById("selectedMarketSample");
+    const googleMap = document.getElementById("signalGoogleMap");
+    if (marketName) marketName.textContent = market;
+    if (marketSignal) marketSignal.textContent = signal;
+    if (marketSample) marketSample.textContent = sample;
+    if (googleMap) {
+      const city = node.dataset.state === "all" ? "corridor" : market.split(",")[0];
+      googleMap.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(node.dataset.mapQuery)}`;
+      googleMap.textContent = `Open ${city} in Google Maps`;
+    }
+
+    updateSignalMapRender(node);
+    focusSignalMap(node);
+
+    if (syncExplore && exploreState && node.dataset.state && exploreState.value !== node.dataset.state) {
+      exploreState.value = node.dataset.state;
+      exploreState.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+    if (announce) showToast(market, `${signal} · ${sample}`);
+  }
+
+  marketNodes.forEach((node) => {
+    preloadSignalMapRender(node.dataset.render);
+    node.addEventListener("click", () => activateMarketNode(node, { syncExplore: true, announce: true }));
+  });
+
+  exploreState?.addEventListener("change", () => {
+    const matchingNode = marketNodes.find((node) => node.dataset.state === exploreState.value)
+      || marketNodes.find((node) => node.dataset.state === "all");
+    if (matchingNode && !matchingNode.classList.contains("active")) activateMarketNode(matchingNode);
   });
 
   document.querySelectorAll("[data-intro]").forEach((button) => {

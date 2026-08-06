@@ -1,3 +1,20 @@
+# SUPERSEDED — DO NOT USE FOR STATUS
+
+**This short closeout is superseded as of August 6, 2026.**
+
+Authoritative documents:
+- `deliverables/BRIDGE-PHASE-2-READY-FOR-ACCEPTANCE-2026-08-06.md`
+- `docs/phase2-dillon-status-2026-08-06.md`
+
+Correct status: **REVIEW PACKAGE BUILT — FORMAL PHASE 2 CLOSE PENDING**
+
+Correct one-sentence status:  
+Phase 2's reviewable product-definition and prototype package is built, but Phase 2 is not formally closed and Dillon's full front-end lane is not done until the canonical Next.js reconciliation, Tori acceptance, Miraj contract confirmation, and later shared integration work are completed.
+
+---
+
+# Original (no longer authoritative)
+
 # Phase 2 Dillon lane closeout
 
 **Date:** 2026-08-06  

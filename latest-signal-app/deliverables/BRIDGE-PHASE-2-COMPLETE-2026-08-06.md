@@ -1,3 +1,19 @@
+# SUPERSEDED — DO NOT USE FOR STATUS
+
+**This document is superseded as of August 6, 2026.**
+
+The statements “PHASE 2 COMPLETE”, “no further Phase 2 UI construction remains”, and “Tori feedback — closed” were incorrect overclaims.
+
+**Authoritative status document:**  
+[`BRIDGE-PHASE-2-READY-FOR-ACCEPTANCE-2026-08-06.md`](./BRIDGE-PHASE-2-READY-FOR-ACCEPTANCE-2026-08-06.md)
+
+**Correct one-sentence status:**  
+Phase 2's reviewable product-definition and prototype package is built, but Phase 2 is not formally closed and Dillon's full front-end lane is not done until the canonical Next.js reconciliation, Tori acceptance, Miraj contract confirmation, and later shared integration work are completed.
+
+---
+
+# Original content below is retained only for history and is no longer authoritative
+
 # Bridge Software — Phase 2 COMPLETE
 
 **Closeout date:** August 6, 2026  
